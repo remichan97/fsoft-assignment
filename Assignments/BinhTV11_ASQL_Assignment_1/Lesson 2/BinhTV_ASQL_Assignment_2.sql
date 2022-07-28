@@ -93,7 +93,16 @@ AS
 GO
 
 SELECT
-	*
+	[TraineeId]
+      ,[Full_Name]
+      ,[Gender]
+      ,[Birth_Date]
+      ,[ET_IQ]
+      ,[ET_Gmath]
+      ,[ET_English]
+      ,[Training_Class]
+      ,[Evaluation_Notes]
+      ,[FSoft_Account]
 FROM
 	vwShowPassedTrainee
 GO
