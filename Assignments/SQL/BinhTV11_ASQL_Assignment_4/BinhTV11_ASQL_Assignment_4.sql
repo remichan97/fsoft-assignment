@@ -224,7 +224,7 @@ FROM
 	[dbo].udf_EmpTracking(@EmpNo)
 GO
 -- write a trigger preventing level = 1 and salary > 10000000 from being inputted into the database
-CREATE OR ALTER TRIGGER [dbo].tg_PreventWrongInput ON Employee instead OF UPDATE, INSERT
+CREATE OR ALTER TRIGGER [dbo].tg_PreventWrongInput ON Employee FOR UPDATE, INSERT
 AS
 	IF EXISTS (SELECT
 	i.[Level]
@@ -243,5 +243,5 @@ GO
 INSERT INTO [dbo].[Employee]
 	(EmpNo,EmpName, BirthDay, DeptNo, MgrNo, StartDate, Salary, [Status], Note, [Level], Email)
 VALUES
-	(9 ,'Binh Truong' ,'1997-08-25' ,5 ,0 ,'2018-05-03' ,1000000025 ,1 ,'note 1' ,2 ,'binhtruong@gmail.com')
+	(9 ,'Binh Truong' ,'1997-08-25' ,5 ,0 ,'2018-05-03' ,1000000025 ,1 ,'note 1' ,2 ,'binhtruong10@gmail.com')
 GO
