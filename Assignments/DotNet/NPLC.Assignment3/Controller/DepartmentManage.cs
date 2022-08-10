@@ -1,8 +1,3 @@
-using System.Runtime.CompilerServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using NPLC.Assignment3.Models;
 
 namespace NPLC.Assignment3.Controller
