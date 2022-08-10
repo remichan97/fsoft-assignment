@@ -24,9 +24,10 @@ namespace NPLC.Assignment3.Controller
 			Console.WriteLine($"App menu");
 			Console.WriteLine($"1. Add new Employee");
 			Console.WriteLine($"2. View all Employee");
+			Console.WriteLine($"3. Classifies Employee");
 			Console.WriteLine($"3. Search for Employee");
-			Console.WriteLine($"4. Report");
-			Console.WriteLine($"5. Exit");
+			Console.WriteLine($"5. Report");
+			Console.WriteLine($"6. Exit");
 			Console.Write("Your choice: ");
 
 		}
@@ -129,6 +130,25 @@ namespace NPLC.Assignment3.Controller
 				Console.WriteLine(string.Format("{0} - {1}", src.Department, src.Count));
 
 			}
+		}
+
+		internal static void ClassifiesEmployee()
+		{
+			var hourlyEmployee = department.GetEmployees<HourlyEmployee>();
+			Console.WriteLine($"Hourly Employee:");
+			
+			hourlyEmployee.ForEach(it => { 
+				Console.WriteLine(it.ToString());
+			});
+
+			var salariedEmployee = department.GetEmployees<SalaryEmployee>();
+			Console.WriteLine("Salaries Employee");
+
+			salariedEmployee.ForEach(it =>
+			{
+				Console.WriteLine($"{it.ToString()}");
+
+			});
 		}
 	}
 }

@@ -40,14 +40,17 @@ namespace NPLC.Assignment3
 						DepartmentManage.DisplayEmployee();
 						break;
 					case 3:
+						DepartmentManage.ClassifiesEmployee();
+						break;
+					case 4:
 						Console.WriteLine($"Enter a keyword to search: ");
 						string keyword = Console.ReadLine()!;
 						DepartmentManage.Search(keyword);
 						break;
-					case 4:
+					case 5:
 						DepartmentManage.Count();
 						break;
-					case 5:
+					case 6:
 						Environment.Exit(0);
 						break;
 				}
