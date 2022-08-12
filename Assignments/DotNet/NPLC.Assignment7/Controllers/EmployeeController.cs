@@ -1,3 +1,4 @@
+using System.Linq;
 using NPLC.Assignment7.Models;
 
 namespace NPLC.Assignment7.Controllers
@@ -199,6 +200,8 @@ namespace NPLC.Assignment7.Controllers
 				Console.WriteLine($"Department {it.DepartmentName}:");
 
 				var query = (from emp in employees join dep in departments on emp.DepartmentId equals dep.DepartmentId where emp.DepartmentId == it.DepartmentId select emp).ToList();
+
+				query.ForEach(it => it.ToString());
 			});
 		}
 	}
