@@ -11,6 +11,11 @@ namespace TPBank.DataAccessLayer
             customers = new List<Customer>();
         }
 
+        public Customer CheckUnique(Customer customer)
+        {
+			return customers.Where(it => it.PhoneNumber.Equals(customer.PhoneNumber) || it.Username.Equals(customer.Username)).FirstOrDefault();
+		}
+
         public Guid AddCustomer(Customer customer)
         {
             customers.Add(customer);

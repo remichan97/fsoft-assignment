@@ -2,18 +2,19 @@
 
 namespace TPBank.DataAccessLayer
 {
-    public interface ICustomerDataAccessLayer
-    {
-        Customer GetCustomerByUsername(string username);
+	public interface ICustomerDataAccessLayer
+	{
+		Customer CheckUnique(Customer customer);
+		Customer GetCustomerByUsername(string username);
 
-        List<Customer> GetCustomers();
+		List<Customer> GetCustomers();
 
-        List<Customer> GetCustomersByCondition(Func<Customer, bool> predicate);
+		List<Customer> GetCustomersByCondition(Func<Customer, bool> predicate);
 
-        Guid AddCustomer(Customer customer);
+		Guid AddCustomer(Customer customer);
 
-        bool UpdateCustomer(Customer customer);
+		bool UpdateCustomer(Customer customer);
 
-        bool DeleteCustomer(Guid customerId);
-    }
+		bool DeleteCustomer(Guid customerId);
+	}
 }
