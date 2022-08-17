@@ -15,7 +15,7 @@ namespace TPBank.Entities.Models
 			}
 			set
 			{
-				if (!this.customerCode.IsCustomerCodeValid())
+				if (!value.IsCustomerCodeValid())
 				{
 					throw new ArgumentException("Customer Code must not be negative or zero");
 				}
@@ -33,7 +33,7 @@ namespace TPBank.Entities.Models
 			}
 			set
 			{
-				if (!this.customerName.IsCustomerNameValid())
+				if (!value.IsCustomerNameValid())
 				{
 					throw new ArgumentException("Customer name must not be empty and need to be no more than 40 characters");
 				}
@@ -46,8 +46,17 @@ namespace TPBank.Entities.Models
 		public string City { get; set; }
 		public string Country { get; set; }
 
-		[Phone]
-		public string PhoneNumber { get; set; }
+		private string phoneNumber;
+		public string PhoneNumber {
+			get { return this.phoneNumber; }
+			set {
+				if (!value.IsPhoneNumberValid())
+				{
+					throw new ArgumentException("Phone number format invalid");
+				}
+				phoneNumber = value;
+			}
+		}
 
 		private string username;
 
@@ -59,7 +68,7 @@ namespace TPBank.Entities.Models
 			}
 			set
 			{
-				if (!this.username.IsUsernameNull())
+				if (!value.IsUsernameNull())
 				{
 					throw new ArgumentNullException("Username cannot be empty");
 				}
@@ -77,7 +86,7 @@ namespace TPBank.Entities.Models
 			}
 			set
 			{
-				if (!this.password.IsPasswordValid())
+				if (!value.IsPasswordValid())
 				{
 					throw new ArgumentException("Password must have at least 6 characters and have at least a lowercase, an uppercase and a numeric character.");
 				}

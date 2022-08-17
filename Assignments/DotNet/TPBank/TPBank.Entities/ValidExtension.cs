@@ -1,7 +1,9 @@
-﻿namespace TPBank.Entities
+﻿using System.Text.RegularExpressions;
+namespace TPBank.Entities
 {
 	public static class ValidExtension
 	{
+		private static readonly string pattern = @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
 		private static bool IsPatternMatch(string test)
 		{
 			return test.Any(ch => char.IsUpper(ch)) && test.Any(it => char.IsLower(it)) && test.Any(x => char.IsNumber(x));
@@ -20,6 +22,11 @@
 		public static bool IsPhoneNumberLengthValid(this string phoneNumber)
 		{
 			return phoneNumber.Length == 10;
+		}
+
+		public static bool IsPhoneNumberValid(this string phoneNumber)
+		{
+			return Regex.IsMatch(phoneNumber, pattern);
 		}
 
 		public static bool IsUsernameNull(this string username)

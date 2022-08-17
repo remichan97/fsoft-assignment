@@ -213,7 +213,7 @@ namespace TPBank.Presentation
 			}
 			else
 			{
-				Console.WriteLine($"Something went wrong. Please try again!");
+				Console.WriteLine($"New password does not meet the requirement. Password must have at least 6 characters, have aan uppercase, lowercase and a numerical character.");
 			}
 		}
 

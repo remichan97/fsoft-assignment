@@ -90,6 +90,7 @@ namespace TPBank.BusinessLogicLayer
 
 		public bool UpdateCustomer(Customer customer)
 		{
+			if(!customer.Password.IsPasswordValid()) return false;
 			return customerDataAccessLayer.UpdateCustomer(customer);
 		}
 
