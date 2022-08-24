@@ -55,6 +55,7 @@
     <Compile Include="ISP\Solution\IShowCustomer.cs" />
     <Compile Include="ISP\Violation\ICustomer.cs" />
     <Compile Include="ISP\Violation\ICustomerDatabase.cs" />
+    <Compile Include="LSP\Solution\Customer.cs" />
     <Compile Include="LSP\Solution\ICustomer.cs" />
     <Compile Include="LSP\Solution\IProject.cs" />
     <Compile Include="LSP\Solution\LoyalCustomer.cs" />
