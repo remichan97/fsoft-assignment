@@ -1,6 +1,6 @@
 namespace CSharpSOLIDExample.LSP.Solution
 {
-	public class PotentialCustomer : ICustomer
+	public class PotentialCustomer : ICustomer, IProject
 	{
 		public string GetCustomerDetails(int customerId)
 		{

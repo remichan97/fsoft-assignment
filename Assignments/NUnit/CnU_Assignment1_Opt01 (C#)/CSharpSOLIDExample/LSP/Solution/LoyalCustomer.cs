@@ -6,10 +6,5 @@
 		{
 			return "Loyal Customer Detail";
 		}
-
-		public string GetCustomerProject(int customerId)
-		{
-			return "Loyal Customer Project";
-		}
 	}
 }

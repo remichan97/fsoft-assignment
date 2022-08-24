@@ -4,7 +4,7 @@ namespace CSharpSOLIDExample.DIP.Solution
 {
 	public class ShapeRepo
 	{
-		IDatabase _data = new Database();
+		private IDatabase _data = new Database();
 
 		public IEnumerable<Square> GetAllSquare()
 		{

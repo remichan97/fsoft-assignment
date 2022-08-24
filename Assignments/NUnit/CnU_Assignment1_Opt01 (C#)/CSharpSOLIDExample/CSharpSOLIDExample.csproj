@@ -51,9 +51,8 @@
     <Compile Include="DIP\Violation\Database.cs" />
     <Compile Include="DIP\Violation\ShapeRepository.cs" />
     <Compile Include="DIP\Violation\Square.cs" />
-    <Compile Include="ISP\Solution\ICustomer.cs" />
-    <Compile Include="ISP\Solution\ICustomerDatabase.cs" />
-    <Compile Include="ISP\Solution\ILoyalCustomer.cs" />
+    <Compile Include="ISP\Solution\IAddCustomer.cs" />
+    <Compile Include="ISP\Solution\IShowCustomer.cs" />
     <Compile Include="ISP\Violation\ICustomer.cs" />
     <Compile Include="ISP\Violation\ICustomerDatabase.cs" />
     <Compile Include="LSP\Solution\ICustomer.cs" />

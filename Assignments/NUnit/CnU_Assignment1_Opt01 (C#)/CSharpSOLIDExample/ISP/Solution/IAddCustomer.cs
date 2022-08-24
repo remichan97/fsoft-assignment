@@ -1,6 +1,6 @@
 ﻿namespace CSharpSOLIDExample.ISP.Solution
 {
-	public interface ICustomer
+	internal interface IAddCustomer
 	{
 		bool AddCustomerDetails();
 	}

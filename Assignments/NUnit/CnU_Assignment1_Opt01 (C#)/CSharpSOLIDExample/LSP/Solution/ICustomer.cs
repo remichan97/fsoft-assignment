@@ -1,6 +1,6 @@
 namespace CSharpSOLIDExample.LSP.Solution
 {
-	public interface ICustomer : IProject
+	public interface ICustomer
 	{
 		string GetCustomerDetails(int customerId);
 	}
