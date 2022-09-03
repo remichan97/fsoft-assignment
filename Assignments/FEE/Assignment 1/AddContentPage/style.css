@@ -1,0 +1,109 @@
+header {
+	background-color: rgb(248, 249, 250);
+	border: 1px solid #dee2e6;
+}
+
+.header-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.header-container h4 {
+	margin: 10px 15px;
+}
+
+.profile-menu {
+	box-sizing: border-box;
+	align-self: center;
+	color: black;
+	margin-right: 15px;
+	text-decoration: none;
+}
+
+.body-container {
+	display: flex;
+	box-sizing: border-box;
+}
+
+.body-container .sidebar {
+	background-color: rgb(248, 249, 250);
+	border: 1px solid #dee2e6;
+	padding: 0 5px;
+}
+
+.sidebar .search-bar {
+	padding: 5px 0;
+	border-bottom: 1px solid #dee2e6;
+}
+
+.sidebar .sidebar-item {
+	padding: 12px;
+}
+
+.sidebar .sidebar-item a {
+	text-decoration: none;
+	color: #696a6b;
+}
+
+.content {
+	padding: 0 12px;
+	width: 100%;
+}
+
+.container {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.form-header {
+	padding: 0.25rem 1.25rem;
+	margin-bottom: 0;
+	background-color: lightgray;
+	border-bottom: 1px solid black;
+}
+
+.form-container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	word-wrap: break-word;
+	border: 1px solid black;
+	border-radius: .25rem;
+}
+
+.form-body  {
+	padding: 1.25rem;
+}
+
+.input, .input-checkbox {
+	margin-bottom: 1rem;
+}
+
+.input input {
+	display: block;
+	width: 100%;
+	padding: 10px 0;
+}
+
+.input .form-label {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.input textarea {
+	display: block;
+	width: 100%;
+	padding: 10px 0;
+}
+
+.input-button .btn {
+	background-color: green;
+	font-weight: 400;
+	font-size: 1rem;
+	color: white;
+	padding: 6px 12px;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	line-height: 1.5;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+		crossorigin="anonymous" />
+</head>
+
+<body>
+	<header>
+		<div class="header-container">
+			<h4>CMS</h4>
+			<a href="#" class="profile-menu">
+				<i class="fas fa-user"></i>
+				<i class="fas fa-sort-down"></i>
+			</a>
+		</div>
+	</header>
+	<div class="body-container">
+		<div class="sidebar">
+			<div class="search-bar">
+				<input type="search">
+			</div>
+			<div class="sidebar-item">
+				<a href="#"><i class="far fa-calendar-alt"></i> View contents</a>
+			</div>
+			<div class="sidebar-item">
+				<a href="#"><i class="fas fa-plus-circle"></i> Add content</a>
+			</div>
+		</div>
+		<div class="content">
+			<h3>Add content</h3>
+			<div class="signin">
+				<div class="container">
+					<div class="form-container">
+						<div class="form-header">
+							<h4>Add new content</h4>
+						</div>
+						<div class="form-body">
+							<form action="">
+								<div class="input">
+									<div class="form-label">
+										<label for="content-name">Title</label>
+									</div>
+									<input type="text" placeholder="Enter Content name" maxlength="50" id="content-name">
+								</div>
+								<div class="input">
+									<div class="form-label">
+										<label for="brief">Brief</label>
+									</div>
+									<textarea id="brief" cols="30" rows="5"></textarea>
+								</div>
+								<div class="input">
+									<div class="form-label">
+										<label for="content">Content</label>
+									</div>
+									<textarea id="content" cols="30" rows="10"></textarea>
+								</div>
+								<div class="input-button">
+									<input type="button" value="Add content" class="btn">
+									<input type="reset" value="Reset" class="btn" style="background-color: gray;">
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
