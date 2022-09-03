@@ -1,0 +1,47 @@
+.container {
+	max-width: 25%;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.form-header {
+	padding: 0.25rem 1.25rem;
+	margin-bottom: 0;
+	background-color: lightgray;
+	border-bottom: 1px solid black;
+}
+
+.form-container {
+	margin-top: 150px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	word-wrap: break-word;
+	border: 1px solid black;
+	border-radius: .25rem;
+}
+
+.form-body  {
+	padding: 1.25rem;
+}
+
+.input, .input-checkbox {
+	margin-bottom: 1rem;
+}
+
+.input input {
+	display: block;
+	width: 100%;
+}
+
+.input .btn {
+	background-color: green;
+	font-weight: 400;
+	font-size: 1rem;
+	color: white;
+	padding: 6px 12px;
+	border-radius: 25px;
+	line-height: 1.5;
+}
