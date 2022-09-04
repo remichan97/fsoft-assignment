@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Register</title>
 	<link rel="stylesheet" href="./style.css">
+	<script src="./script.js"></script>
 </head>
 
 <body>
@@ -19,19 +20,23 @@
 				<div class="form-body">
 					<form action="">
 						<div class="input">
-							<input type="text" placeholder="Username" maxlength="50">
+							<input type="text" placeholder="Username" maxlength="50" id="username">
+							<p id="validateuser"></p>
 						</div>
 						<div class="input">
-							<input type="text" placeholder="Email" maxlength="50">
+							<input type="text" placeholder="Email" maxlength="50" id="email">
+							<p id="validateemail"></p>
 						</div>
 						<div class="input">
-							<input type="password" placeholder="Password" maxlength="50">
+							<input type="password" placeholder="Password" maxlength="50" id="password">
+							<p id="validatepw"></p>
 						</div>
 						<div class="input">
-							<input type="password" placeholder="Re-type password">
+							<input type="password" placeholder="Re-type password" id="repassword">
+							<p id="validaterepw"></p>
 						</div>
 						<div class="input">
-							<input type="button" value="Register" class="btn">
+							<input type="button" value="Register" class="btn" onclick="validate()">
 						</div>
 						<div class="input">
 							<a href="#">Click here to go back to sign in page!</a>
