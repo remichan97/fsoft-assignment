@@ -9,15 +9,52 @@ header {
 }
 
 .header-container h4 {
-	margin: 10px 15px;
+	vertical-align: middle;
+    padding-left: 9px;
 }
 
 .profile-menu {
+	display: inline-block;
+	position: relative;
 	box-sizing: border-box;
 	align-self: center;
 	color: black;
 	margin-right: 15px;
 	text-decoration: none;
+	margin: 12px 12px;
+}
+
+.profile-menu .dropbtn {
+	border: none;
+	padding: 12px;
+	background-color: rgb(248, 249, 250);
+}
+
+.profile-menu .dropbtn:hover {
+	background-color: #696a6b;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	right: 0;
+	min-width: 200px;
+	text-decoration: none;
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.profile-menu:hover .dropdown-content {
+	display: block;
 }
 
 .body-container {
@@ -26,6 +63,7 @@ header {
 }
 
 .body-container .sidebar {
+	width: 250px;
 	background-color: rgb(248, 249, 250);
 	border: 1px solid #dee2e6;
 	padding: 0 5px;
@@ -36,8 +74,17 @@ header {
 	border-bottom: 1px solid #dee2e6;
 }
 
+.sidebar .search-btn {
+	display: inline;
+	background-color: #f4f4f4;
+}
+
 .sidebar .sidebar-item {
 	padding: 12px;
+}
+
+.sidebar .sidebar-item:hover {
+	background-color: #aeafb1;
 }
 
 .sidebar .sidebar-item a {
@@ -64,7 +111,7 @@ header {
 
 .form-container {
 	position: relative;
-	/* display: flex; */
+	display: flex;
 	flex-direction: column;
 	word-wrap: break-word;
 	border: 1px solid black;
@@ -73,6 +120,39 @@ header {
 
 .form-body  {
 	padding: 1.25rem;
+}
+
+.input, .input-checkbox {
+	margin-bottom: 1rem;
+}
+
+.input input {
+	display: block;
+	width: 75%;
+	padding: 10px 0;
+}
+
+.input .form-label {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.input textarea {
+	display: block;
+	width: 75%;
+	padding: 10px 0;
+}
+
+.input-button .btn {
+	background-color: green;
+	font-weight: 400;
+	font-size: 1rem;
+	color: white;
+	padding: 6px 12px;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	line-height: 1.5;
 }
 
 .content-table {
@@ -86,11 +166,8 @@ header {
 
 th, td {
 	border: 1px solid black;
-}
-
-.content-table table thead th{
+	padding: 12px;
 	text-align: left;
-	padding: 3px 0;
 }
 
 table tbody tr:nth-child(even) {
