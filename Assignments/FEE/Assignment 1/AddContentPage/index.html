@@ -15,16 +15,22 @@
 	<header>
 		<div class="header-container">
 			<h4>CMS</h4>
-			<a href="#" class="profile-menu">
-				<a href="../EditProfilePage/index.html"><i class="far fa-user-circle"></i> Edit User Profile</a>
-				<a href="../SignInForm/index.html"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
-			</a>
+			<div class="profile-menu">
+				<button class="dropbtn">
+					<i class="fas fa-user"></i>
+					<i class="fas fa-sort-down"></i>
+				</button>
+				<div class="dropdown-content">
+					<a href="../EditProfilePage/index.html"><i class="far fa-user-circle"></i> Edit User Profile</a>
+					<a href="../SignInForm/index.html"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+				</div>
+			</div>
 		</div>
 	</header>
 	<div class="body-container">
 		<div class="sidebar">
 			<div class="search-bar">
-				<input type="search" placeholder="Search...">
+				<input type="search" placeholder="Search..."> <button class="search-btn"><i class="fas fa-search"></i></button>
 			</div>
 			<div class="sidebar-item">
 				<a href="../ViewContentPage/index.html"><i class="far fa-calendar-alt"></i> View contents</a>
@@ -47,19 +53,19 @@
 									<div class="form-label">
 										<label for="content-name">Title</label>
 									</div>
-									<input type="text" placeholder="Enter Content name" maxlength="50" id="content-name">
+									<input type="text" placeholder="Enter Content name" minlength="10" maxlength="200" id="content-name" required>
 								</div>
 								<div class="input">
 									<div class="form-label">
 										<label for="brief">Brief</label>
 									</div>
-									<textarea id="brief" cols="30" rows="5"></textarea>
+									<textarea id="brief" cols="30" rows="5" minlength="30" maxlength="150" required></textarea>
 								</div>
 								<div class="input">
 									<div class="form-label">
 										<label for="content">Content</label>
 									</div>
-									<textarea id="content" cols="30" rows="10"></textarea>
+									<textarea id="content" cols="30" rows="10" minlength="50" maxlength="1000" required></textarea>
 								</div>
 								<div class="input-button">
 									<input type="button" value="Add content" class="btn">
