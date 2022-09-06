@@ -18,25 +18,25 @@
 					<h4>Register an account</h4>
 				</div>
 				<div class="form-body">
-					<form action="">
+					<form action="../SignInForm/index.html" name="reg">
 						<div class="input">
-							<input type="text" placeholder="Username" maxlength="50" id="username">
+							<input type="text" placeholder="Username" maxlength="50" id="username" name="username">
 							<p id="validateuser"></p>
 						</div>
 						<div class="input">
-							<input type="text" placeholder="Email" maxlength="50" id="email">
+							<input type="text" placeholder="Email" maxlength="50" id="email" name="email">
 							<p id="validateemail"></p>
 						</div>
 						<div class="input">
-							<input type="password" placeholder="Password" maxlength="50" id="password">
+							<input type="password" placeholder="Password" maxlength="50" id="password" name="password">
 							<p id="validatepw"></p>
 						</div>
 						<div class="input">
-							<input type="password" placeholder="Re-type password" id="repassword">
+							<input type="password" placeholder="Re-type password" id="repassword" name="repw">
 							<p id="validaterepw"></p>
 						</div>
 						<div class="input">
-							<input type="button" value="Register" class="btn" onclick="validate()">
+							<input type="button" value="Register" class="btn" onclick="return validate()">
 						</div>
 						<div class="input">
 							<a href="../SignInForm/index.html" style="text-decoration: none;">Click here to go back to sign in page!</a>

@@ -18,13 +18,13 @@
 					<h4>Please Sign-in!</h4>
 				</div>
 				<div class="form-body">
-					<form action="">
+					<form action="../EditProfilePage/index.html" name="signin">
 						<div class="input">
-							<input type="email" placeholder="Email" maxlength="50" id="email">
+							<input type="email" placeholder="Email" maxlength="50" name="email" id="email">
 							<p id="validation"></p>
 						</div>
 						<div class="input">
-							<input type="password" placeholder="Password" maxlength="50" id="password">
+							<input type="password" placeholder="Password" maxlength="50" id="password" name="password">
 							<p id="validationpw"></p>
 						</div>
 						<div class="input-checkbox">
@@ -32,7 +32,7 @@
 							<label for="remember">Remember me!</label>
 						</div>
 						<div class="input">
-							<input type="button" value="Sign-in" class="btn" onclick="validate()">
+							<input type="submit" value="Sign-in" class="btn" onclick="return validate()">
 						</div>
 						<div class="input">
 							<a href="../RegisterForm/index.html" style="text-decoration: none;">Click here to
