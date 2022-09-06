@@ -1,3 +1,7 @@
+* {
+	font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
+
 body {
 	background-color: rgb(231, 230, 230);
 }
@@ -31,12 +35,13 @@ body {
 	border-radius: .25rem;
 }
 
-.form-body  {
+.form-body {
 	padding: 1.25rem;
 	background-color: white;
 }
 
-.input, .input-checkbox {
+.input,
+.input-checkbox {
 	margin-bottom: 1rem;
 }
 
