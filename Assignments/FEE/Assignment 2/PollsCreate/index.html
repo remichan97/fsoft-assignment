@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/custom/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<title>New Poll</title>
+</head>
+
+<body>
+	<header class="header">
+		<div class="navbar navbar-expand-lg bg-dark navbar-dark">
+			<div class="container">
+				<a class="navbar-brand mb-0 h1" href="../PollsHome/index.html">Polls</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav">
+						<a class="nav-link" href="../PollsHome/index.html">Vote</a>
+						<a class="nav-link active" href="../PollsCreate/index.html">Create</a>
+						<a class="nav-link" href="../PollList/index.html">List</a>
+						<a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Sign-in</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<article class="content">
+		<div class="container">
+			<h1>Create new Poll</h1>
+			<form class="form-needs-validation" novalidate>
+				<div class="row mb-3">
+					<div class="col-sm-2 col-form-label"></div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" placeholder="Enter new Poll name" required>
+					</div>
+					<div class="invalid-tooltip">
+						Please enter a poll name
+					</div>
+				</div>
+				<hr />
+				<div class="row mb-3">
+					<div class="col-sm-2 col-form-label"></div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" placeholder="Enter your question" required>
+					</div>
+					<div class="invalid-tooltip">
+						Please enter a question to be asked
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-sm-10 offset-sm-2">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" id="gridCheck1">
+							<label class="form-check-label" for="gridCheck1">
+								Mandatory
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-sm-10 offset-sm-2">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" id="gridCheck1">
+							<label class="form-check-label" for="gridCheck1">
+								Participant can select multiple choices
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label for="question1" class="col-sm-2 col-form-label">Possible answers</label>
+					<div class="col-sm-10 flex">
+						<input type="text" class="form-control reduced-width" id="question1" placeholder="Add an answer"
+							aria-label="Add an answer" aria-describedby="button-addon2" required>
+						<button class="btn btn-primary" type="button" id="button-addon2"><i
+								class="fas fa-plus"></i></button>
+					</div>
+					<div class="col-sm-2 form-label"></div>
+					<div class="col-sm-10 data">
+
+					</div>
+					<div class="invalid-tooltip">
+						Please enter an answer
+					</div>
+				</div>
+				<div class="add-question-data">
+
+				</div>
+				<button type="button" class="btn btn-success" id="add-question"><i class="fas fa-plus"></i> Add Question</button>
+				<div class="retain-button-poll">
+					<button type="submit" class="btn btn-secondary">Save</button>
+				</div>
+			</form>
+		</div>
+		</div>
+	</article>
+	<script>
+		$("#button-addon2").on("click", function () {
+			$(".data").append('<input type="text" class="form-control reduced-width" id="question1" placeholder="Add an answer" aria-label="Add an answer" aria-describedby="button-addon2" required>');
+		});
+		$("#add-question").on("click", function () {
+			var html = '<hr /><div class="row mb-3"><div class="col-sm-2 col-form-label"></div><div class="col-sm-10"><input type="text" class="form-control" placeholder="Enter your question" required></div><div class="invalid-tooltip">Please enter a question to be asked</div></div><div class="row mb-3"><div class="col-sm-10 offset-sm-2"><div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck1"><label class="form-check-label" for="gridCheck1">Mandatory</label></div></div></div><div class="row mb-3"><div class="col-sm-10 offset-sm-2"><div class="form-check"><input class="form-check-input" type="checkbox" id="gridCheck1"><label class="form-check-label" for="gridCheck1">Participant can select multiple choices</label></div></div></div><div class="row mb-3"><label for="question1" class="col-sm-2 col-form-label">Possible answers</label><div class="col-sm-10 flex"><input type="text" class="form-control reduced-width" id="question1" placeholder="Add an answer"aria-label="Add an answer" aria-describedby="button-addon2" required><button class="btn btn-primary" type="button" id="button-addon2"><i class="fas fa-plus"></i></button></div><div class="col-sm-2 form-label"></div><div class="col-sm-10 data"></div><div class="invalid-tooltip">Please enter an answer</div></div>';
+			$(".add-question-data").append(html);
+		});
+	</script>
+	<script src="../js/custom/createnew.validation.js"></script>
+
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Sign-in</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form class="row needs-validation" novalidate>
+						<div class="md-3 separator">
+							<label for="validation01" class="form-label">Alias</label>
+							<input type="text" class="form-control" id="validation01" placeholder="Remi-chan" required>
+							<div class="invalid-feedback">
+								Please enter your alias
+							</div>
+						</div>
+						<div class="md-3 separator">
+							<label for="validation02" class="form-label">Password</label>
+							<input type="password" class="form-control" id="validation02" required>
+							<div class="invalid-feedback">
+								Please enter your password.
+							</div>
+						</div>
+						<div class="md-3 separator">
+							<input type="checkbox" id="check" class="form-check-input">
+							<label for="check" class="form-check-label">Remember me!</label>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-success">Sign-in</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../js/custom/signin.validation.js"></script>
+
+</body>
+
+</html>

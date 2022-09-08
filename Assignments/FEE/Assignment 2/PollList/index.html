@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/custom/style.css">
+	<script src="../js/bootstrap.min.js"></script>
+	<title>Document</title>
+</head>
+
+<body>
+	<header class="header">
+		<div class="navbar navbar-expand-lg bg-dark navbar-dark">
+			<div class="container">
+				<a class="navbar-brand mb-0 h1" href="#">Polls</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav">
+						<a class="nav-link" href="../PollsHome/index.html">Vote</a>
+						<a class="nav-link" href="../PollsCreate/index.html">Create</a>
+						<a class="nav-link active" href="../PollList/index.html">List</a>
+						<a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Sign-in</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<article class="content">
+		<div class="container">
+			<div class="action-button-group">
+				<div class="btn-group" role="group" aria-label="Action Button">
+					<button type="button" class="btn btn-success active">Active</button>
+					<button type="button" class="btn btn-secondary">Drafts</button>
+					<button type="button" class="btn btn-light">Closed</button>
+				</div>
+			</div>
+			<div class="data-table">
+				<table class="table table-bordered">
+					<thead class="table-secondary">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">The list of question and issues within</th>
+							<th scope="col">Managements</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">98</th>
+							<td>Great Poll</td>
+							<td>
+								<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+									<button type="button" class="btn btn-outline-dark">View Results</button>
+									<button type="button" class="btn btn-outline-dark">Close Poll</button>
+									<button type="button" class="btn btn-danger">Delete</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</article>
+
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Sign-in</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form class="row needs-validation" novalidate>
+						<div class="md-3 separator">
+							<label for="validation01" class="form-label">Alias</label>
+							<input type="text" class="form-control" id="validation01" placeholder="Remi-chan" required>
+							<div class="invalid-feedback">
+								Please enter your alias
+							</div>
+						</div>
+						<div class="md-3 separator">
+							<label for="validation02" class="form-label">Password</label>
+							<input type="password" class="form-control" id="validation02" required>
+							<div class="invalid-feedback">
+								Please enter your password.
+							</div>
+						</div>
+						<div class="md-3 separator">
+							<input type="checkbox" id="check" class="form-check-input">
+							<label for="check" class="form-check-label">Remember me!</label>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-success">Sign-in</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../js/custom/signin.validation.js"></script>
+
+</body>
+
+</html>

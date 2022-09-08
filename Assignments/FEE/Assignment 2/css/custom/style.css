@@ -1,0 +1,37 @@
+.content, .action-button-group, .data-table {
+	margin-top: 2.5rem;
+}
+
+p {
+	margin: 0;
+}
+
+.question {
+	margin-top: 1rem;
+}
+
+.answer-group {
+	margin-left: 15px;
+}
+
+.retain-button-poll {
+	margin-top: 3.5rem;
+	margin-left: 13.5rem;
+}
+
+.retain-button {
+	margin-top: 3.5rem;
+	margin-left: 7.5rem;
+}
+
+.flex {
+	display: flex;
+}
+
+.reduced-width {
+	width: 80%;
+}
+
+.separator {
+	margin-bottom: 1rem;
+}
