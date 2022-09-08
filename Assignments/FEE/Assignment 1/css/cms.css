@@ -46,6 +46,7 @@
  	min-width: 200px;
  	text-decoration: none;
  	z-index: 1;
+	box-shadow: 2px 5px 5px #aeafb1;
  }
 
  .dropdown-content a {
