@@ -14,7 +14,7 @@ body {
 	margin-right: auto;
 }
 
-#validation, #validationpw {
+#validation, #validationpw, #validatepw, #validaterepw, #validateuser, #validaterepw {
 	color: red;
 }
 

@@ -20,20 +20,20 @@
 				<div class="form-body">
 					<form action="../SignInForm/index.html" name="reg">
 						<div class="input">
-							<input type="text" placeholder="Username" maxlength="50" id="username" name="username">
-							<p id="validateuser"></p>
+							<input type="text" placeholder="Username" id="username" name="username">
+							<p id="validateuser" oninput="this.style.borderColor = null; document.getElementById('validateuser').innerHTML = ''"></p>
 						</div>
 						<div class="input">
-							<input type="text" placeholder="Email" maxlength="50" id="email" name="email">
-							<p id="validateemail"></p>
+							<input type="text" placeholder="Email" id="email" name="email">
+							<p id="validateemail" oninput="this.style.borderColor = null; document.getElementById('validateemail').innerHTML = ''"></p>
 						</div>
 						<div class="input">
-							<input type="password" placeholder="Password" maxlength="50" id="password" name="password">
-							<p id="validatepw"></p>
+							<input type="password" placeholder="Password" id="password" name="password">
+							<p id="validatepw" oninput="this.style.borderColor = null; document.getElementById('validatepw').innerHTML = ''"></p>
 						</div>
 						<div class="input">
 							<input type="password" placeholder="Re-type password" id="repassword" name="repw">
-							<p id="validaterepw"></p>
+							<p id="validaterepw" oninput="this.style.borderColor = null; document.getElementById('validaterepw').innerHTML = ''"></p>
 						</div>
 						<div class="input">
 							<input type="button" value="Register" class="btn" onclick="return validate()">

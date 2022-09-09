@@ -20,11 +20,11 @@
 				<div class="form-body">
 					<form action="../EditProfilePage/index.html" name="signin" novalidate>
 						<div class="input">
-							<input type="email" placeholder="Email" name="email" id="email" onchange="document.getElementById('validation').innerHTML = ''">
+							<input type="email" placeholder="Email" name="email" id="email" oninput="document.getElementById('validation').innerHTML = ''; this.style.borderColor = null">
 							<p id="validation"></p>
 						</div>
 						<div class="input">
-							<input type="password" placeholder="Password" id="password" name="password" onchange="document.getElementById('validationpw').innerHTML = ''">
+							<input type="password" placeholder="Password" id="password" name="password" oninput="document.getElementById('validationpw').innerHTML = ''; this.style.borderColor = null">
 							<p id="validationpw"></p>
 						</div>
 						<div class="input-checkbox">
