@@ -29,9 +29,14 @@ p {
 }
 
 .reduced-width {
-	width: 80%;
+	margin-top: 1rem;
+	width: 51rem;
 }
 
 .separator {
 	margin-bottom: 1rem;
+}
+
+.container form {
+	margin-top: 1.5rem;
 }
