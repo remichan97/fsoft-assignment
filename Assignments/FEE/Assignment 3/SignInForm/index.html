@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sign-in</title>
+	<link rel="stylesheet" href="../css/form.css">
+	<script src="../js/signin.js"></script>
+</head>
+
+<body>
+	<div class="signin">
+		<div class="container">
+			<div class="form-container">
+				<div class="form-header">
+					<h4>Please Sign-in!</h4>
+				</div>
+				<div class="form-body">
+					<form action="../EditProfilePage/index.html" name="signin" novalidate>
+						<div class="input">
+							<input type="email" placeholder="Email" name="email" id="email" onchange="document.getElementById('validation').innerHTML = ''">
+							<p id="validation"></p>
+						</div>
+						<div class="input">
+							<input type="password" placeholder="Password" id="password" name="password" onchange="document.getElementById('validationpw').innerHTML = ''">
+							<p id="validationpw"></p>
+						</div>
+						<div class="input-checkbox">
+							<input type="checkbox" id="remember">
+							<label for="remember">Remember me!</label>
+						</div>
+						<div class="input">
+							<input type="submit" value="Sign-in" class="btn" onclick="return validate()">
+						</div>
+						<div class="input">
+							<a href="../RegisterForm/index.html" style="text-decoration: none;">Click here to
+								register!</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
