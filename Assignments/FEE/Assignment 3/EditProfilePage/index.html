@@ -9,6 +9,10 @@
 	<link rel="stylesheet" href="../css/cms.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
 		crossorigin="anonymous" />
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
+	<script src="../js/jquery/editprofile.validate.js"></script>
 </head>
 
 <body>
@@ -30,7 +34,8 @@
 	<div class="body-container">
 		<div class="sidebar">
 			<div class="search-bar">
-				<input type="search" placeholder="Search..."> <button class="search-btn"><i class="fas fa-search"></i></button>
+				<input type="search" placeholder="Search..."> <button class="search-btn"><i
+						class="fas fa-search"></i></button>
 			</div>
 			<div class="sidebar-item">
 				<a href="../ViewContentPage/index.html"><i class="far fa-calendar-alt"></i> View contents</a>
@@ -48,18 +53,18 @@
 							<h4>Edit your profile</h4>
 						</div>
 						<div class="form-body">
-							<form action="">
+							<form id="edit-profile">
 								<div class="input">
 									<div class="form-label">
 										<label for="fName">First name</label>
 									</div>
-									<input type="text" id="fName" placeholder="Your first name" minlength="3" maxlength="30" required>
+									<input type="text" id="fName" placeholder="Your first name" name="fName">
 								</div>
 								<div class="input">
 									<div class="form-label">
 										<label for="lName">Last name</label>
 									</div>
-									<input type="text" id="lName" placeholder="Your Last name" minlength="3" maxlength="30" required>
+									<input type="text" id="lName" placeholder="Your Last name" name="lName">
 								</div>
 								<div class="input">
 									<div class="form-label">
@@ -71,13 +76,14 @@
 									<div class="form-label">
 										<label for="phone">Phone number</label>
 									</div>
-									<input type="tel" id="phone" placeholder="Your Phone number" minlength="9" maxlength="13" required>
+									<input type="tel" id="phone" name="phone" placeholder="Your Phone number" minlength="9"
+										maxlength="13">
 								</div>
 								<div class="input">
 									<div class="form-label">
-										<label for="desc">Phone number</label>
+										<label for="desc">Description</label>
 									</div>
-									<textarea id="desc" cols="30" rows="10"></textarea>
+									<textarea id="desc" cols="30" rows="5" name="desc"></textarea>
 								</div>
 								<div class="input-button">
 									<input type="submit" value="Save" class="btn">

@@ -9,6 +9,10 @@
 	<link rel="stylesheet" href="../css/cms.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
 		crossorigin="anonymous" />
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
+	<script src="../js/jquery/addcontent.validate.js"></script>
 </head>
 
 <body>
@@ -30,7 +34,8 @@
 	<div class="body-container">
 		<div class="sidebar">
 			<div class="search-bar">
-				<input type="search" placeholder="Search..."> <button class="search-btn"><i class="fas fa-search"></i></button>
+				<input type="search" placeholder="Search..."> <button class="search-btn"><i
+						class="fas fa-search"></i></button>
 			</div>
 			<div class="sidebar-item">
 				<a href="../ViewContentPage/index.html"><i class="far fa-calendar-alt"></i> View contents</a>
@@ -48,24 +53,25 @@
 							<h4>Add new content</h4>
 						</div>
 						<div class="form-body">
-							<form action="">
+							<form id="add-content">
 								<div class="input">
 									<div class="form-label">
-										<label for="content-name">Title</label>
+										<label for="contentname">Title</label>
 									</div>
-									<input type="text" placeholder="Enter Content name" minlength="10" maxlength="200" id="content-name" required>
+									<input type="text" placeholder="Enter Content name" id="contentname"
+										name="contentname">
 								</div>
 								<div class="input">
 									<div class="form-label">
 										<label for="brief">Brief</label>
 									</div>
-									<textarea id="brief" cols="30" rows="5" minlength="30" maxlength="150" required></textarea>
+									<textarea id="brief" name="brief" cols="30" rows="5"></textarea>
 								</div>
 								<div class="input">
 									<div class="form-label">
 										<label for="content">Content</label>
 									</div>
-									<textarea id="content" cols="30" rows="10" minlength="50" maxlength="1000" required></textarea>
+									<textarea id="content" name="content" cols="30" rows="10"></textarea>
 								</div>
 								<div class="input-button">
 									<input type="submit" value="Add content" class="btn">
@@ -78,6 +84,7 @@
 			</div>
 		</div>
 	</div>
+
 </body>
 
 </html>

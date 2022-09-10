@@ -17,6 +17,13 @@
  	padding-left: 9px;
  }
 
+ .error {
+	border-color: red;
+	color: red;
+ }
+
+
+
  .profile-menu {
  	display: inline-block;
  	position: relative;
