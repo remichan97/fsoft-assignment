@@ -79,13 +79,14 @@
 				<div class="row" id="question0">
 					<label for="question" class="col-sm-2 col-form-label">Possible answers</label>
 					<div class="col-sm-8">
+						<div class="data0"></div>
 						<div class="input-group">
 							<input type="text" class="form-control" id="question" placeholder="Add an answer"
 							aria-label="Add an answer" aria-describedby="button-addon" required>
 							<button class="btn btn-primary" name="answer" id="add-answer0" type="button" onclick="addAnswer(0)" id="button-addon0"><i
 								class="fas fa-plus"></i></button>
 						</div>
-						<div class="data0"></div>
+						
 					</div>
 				</div>
 				<div class="add-question-data">
@@ -144,48 +145,6 @@
 
 <script src="../js/custom/add.element.js"></script>
 <script src="../js/custom/signin.validation.js"></script>
-<script >
-	$().ready(function () {
-		$('.form-needs-validation').validate( {
-			debug: true,
-			errorClass: 'is-invalid',
-			successClass: 'is-valid',
-			rules: {
-				pollname: {
-					required: true,
-					minlength: 3,
-					maxlength: 255
-				},
-				question: {
-					required: true,
-					minlength: 3,
-					maxlength: 255
-				},
-				answer: {
-					required: true,
-					minlength: 3,
-					maxlength: 255
-				}
-			},
-			messages: {
-				pollname: {
-					required: "This field is required",
-					minlength: "Name must be at least 3 characters",
-					maxlength: "Maximum limit is  255 characters"
-				},
-				question: {
-					required: "This field is required",
-					minlength: "Question must be at least 3 characters",
-					maxlength: "Maximum limit is  255 characters"
-				},
-				answer: {
-					required: "This field is required",
-					minlength: "Answer must be at least 3 characters",
-					maxlength: "Maximum limit is  255 characters"
-				}
-			}
-		})
-	})
-</script>
+<script src="../js/custom/createnew.validation.js"></script>
 
 </html>
