@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FA.JustBlog.Core", "FA.JustBlog.Core\FA.JustBlog.Core.csproj", "{023925C4-7A5A-4229-A026-3553D62D72D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FA.JustBlog.Core.UnitTest", "FA.JustBlog.Core.UnitTest\FA.JustBlog.Core.UnitTest.csproj", "{49CA2112-2900-457E-AA7F-B9D83903960B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{023925C4-7A5A-4229-A026-3553D62D72D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{023925C4-7A5A-4229-A026-3553D62D72D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{023925C4-7A5A-4229-A026-3553D62D72D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{023925C4-7A5A-4229-A026-3553D62D72D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49CA2112-2900-457E-AA7F-B9D83903960B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49CA2112-2900-457E-AA7F-B9D83903960B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49CA2112-2900-457E-AA7F-B9D83903960B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49CA2112-2900-457E-AA7F-B9D83903960B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
