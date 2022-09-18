@@ -16,6 +16,7 @@ namespace FA.JustBlog.Core.Models
         public string ShortDescription { get; set; }
         [StringLength(255)]
         public string Meta { get; set; }
+        public string UrlSlug { get; set; }
         public bool Published { get; set; }
         public DateTime PostedOn { get; set; }
         public virtual Categories Categories { get; set; }

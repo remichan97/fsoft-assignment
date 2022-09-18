@@ -9,7 +9,7 @@ namespace FA.JustBlog.Core.Infrastructure
 {
 	public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
 	{
-		private readonly AppDbContext _DbContext;
+		protected readonly AppDbContext _DbContext;
 		protected DbSet<TEntity> DbSet;
 
         public BaseRepository(AppDbContext context)

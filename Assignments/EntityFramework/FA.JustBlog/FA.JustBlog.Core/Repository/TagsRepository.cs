@@ -15,5 +15,9 @@ namespace FA.JustBlog.Core.Repository
 		{
 		}
 
+		public Tags GetTagsByUrlSlugs(string urlSlugs) 
+		{
+			return _DbContext.Tags.FirstOrDefault(it => it.UrlSlug.Equals(urlSlugs));
+		}
 	}
 }
