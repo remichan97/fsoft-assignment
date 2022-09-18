@@ -15,5 +15,28 @@ namespace FA.JustBlog.Core.Repository
 		{
 		}
 
+		public void AddComment(Guid postId, string commentName, string commentEmail, string commentTitle, string commentBody)
+		{
+			Comments comments = new Comments();
+
+			comments.PostId = postId;
+			comments.Name = commentName;
+			comments.Email = commentEmail;
+			comments.CommentHeader = commentTitle;
+			comments.CommentText = commentBody;
+
+			_DbContext.Comments.Add(comments);
+		}
+
+		public IList<Comments> GetCommentsForPost(Guid postId)
+		{
+			return _DbContext.Comments.Where(it => it.Posts.Id.Equals(postId)).ToList();
+		}
+
+		public IList<Comments> GetCommentsForPost(Posts posts)
+		{
+			return _DbContext.Comments.Where(it => it.Posts.Id.Equals(posts.Id)).ToList();
+		}
+
 	}
 }
