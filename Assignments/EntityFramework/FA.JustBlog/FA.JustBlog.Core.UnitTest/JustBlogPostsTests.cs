@@ -20,9 +20,9 @@ public class Tests
 	private PostsRepository repo;
 
 	private IQueryable<Posts> postList = new List<Posts>() {
-		new Posts{Id = Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aede"), Title = "A Post number 1", Meta = "Test", UrlSlug = "post-1", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories {Id = Guid.NewGuid(), Name = "Cat1"}, TotalRate = 50, PostContent = "A whatever text here"},
-		new Posts{Id = Guid.Parse("8c61ae9e-6ea9-4bfe-bc59-9e75293c3026"),Title = "A Post number 2", Meta = "Test", UrlSlug = "post-2", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories {Id = Guid.NewGuid(), Name = "Cat1"}, TotalRate = 50, PostContent = "A whatever text here"},
-		new Posts{Id = Guid.Parse("45cf481f-d98c-471e-b235-d0a9f3b0cfcb"),Title = "A Post number 3", Meta = "Test", UrlSlug = "post-3", Published = false, PostedOn = Convert.ToDateTime("2022/04/05"), Categories = new Categories {Id = Guid.NewGuid(), Name = "Cat2"}, ViewCount = 100, RateCount = 4.5, TotalRate = 50, PostContent = "A whatever text here"},
+		new Posts  {Id = Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aede"), Title = "A Post number 1", Meta = "Test", UrlSlug = "post-1", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories {Id = Guid.NewGuid(), Name = "Cat1"}, TotalRate = 50, PostContent = "A whatever text here" },
+		new Posts { Id = Guid.Parse("8c61ae9e-6ea9-4bfe-bc59-9e75293c3026"), Title = "A Post number 2", Meta = "Test", UrlSlug = "post-2", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories {Id = Guid.NewGuid(), Name = "Cat1"}, TotalRate = 50, PostContent = "A whatever text here" },
+		new Posts { Id = Guid.Parse("45cf481f-d98c-471e-b235-d0a9f3b0cfcb"), Title = "A Post number 3", Meta = "Test", UrlSlug = "post-3", Published = false, PostedOn = Convert.ToDateTime("2022/04/05"), Categories = new Categories {Id = Guid.NewGuid(), Name = "Cat2"}, ViewCount = 100, RateCount = 4.5, TotalRate = 50, PostContent = "A whatever text here" },
 	}.AsQueryable();
 
 	private IQueryable<Tags> tagList = new List<Tags>()
@@ -40,7 +40,8 @@ public class Tests
 
 	private IQueryable<Comments> commentsList = new List<Comments>()
 	{
-		new Comments {},
+		new Comments {Name = "A Demo Comment 1", Posts = new Posts{Id = Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aede"), Title = "A Post number 1", Meta = "Test", UrlSlug = "post-1", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories {Id = Guid.NewGuid(), Name = "Cat1"}, TotalRate = 50, PostContent = "A whatever text here"}, Email = "binhtruong@gmail.com", CommentHeader = "Header", CommentText = "A Comment Body"},
+		new Comments {Name = "A Demo Comment 2", Posts = new Posts{Id = Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aede"), Title = "A Post number 2", Meta = "Test", UrlSlug = "post-1", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories {Id = Guid.NewGuid(), Name = "Cat1"}, TotalRate = 50, PostContent = "A whatever text here"}, Email = "binhtruong@gmail.com", CommentHeader = "Header", CommentText = "A Comment Body"},
 	}.AsQueryable();
 
 	[SetUp]
@@ -213,7 +214,7 @@ public class Tests
 
 		var data = repo.GetCommentsForPost(Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aede"));
 
-		Assert.AreEqual(0, data.Count);
+		Assert.AreEqual(2, data.Count);
 	}
 
 	[Test]
@@ -231,7 +232,19 @@ public class Tests
 	{
 		var repo = new CommentsRepository(mockContext.Object);
 
-		Posts postData = new Posts { };
+		Posts postData = new Posts { Id = Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aede"), Title = "A Post number 1", Meta = "Test", UrlSlug = "post-1", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories { Id = Guid.NewGuid(), Name = "Cat1" }, TotalRate = 50, PostContent = "A whatever text here" };
+
+		var data = repo.GetCommentsForPost(postData);
+
+		Assert.AreEqual(2, data.Count);
+	}
+
+	[Test]
+	public void GetCommentsForPost_WhenPassANonExistPostObject_ReturnEmptyList()
+	{
+		var repo = new CommentsRepository(mockContext.Object);
+
+		Posts postData = new Posts { Id = Guid.Parse("8967f772-a6d7-4ff2-845c-a93c30169aae"), Title = "A Post number 6", Meta = "Test", UrlSlug = "post-1", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories { Id = Guid.NewGuid(), Name = "Cat1" }, TotalRate = 50, PostContent = "A whatever text here" };
 
 		var data = repo.GetCommentsForPost(postData);
 
@@ -239,14 +252,15 @@ public class Tests
 	}
 
 	[Test]
-	public void GetCommentsForPost_WhenPassAnNonExistPostObject_ReturnEmptyList()
+	public void GetCommentsForPost_WhenPassAnExistPostObjectWithoutAnyComment_ReturnEmptyList()
 	{
 		var repo = new CommentsRepository(mockContext.Object);
 
-		Posts postData = new Posts { };
+		Posts postData = new Posts { Id = Guid.Parse("8c61ae9e-6ea9-4bfe-bc59-9e75293c3026"), Title = "A Post number 2", Meta = "Test", UrlSlug = "post-2", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories { Id = Guid.NewGuid(), Name = "Cat1" }, TotalRate = 50, PostContent = "A whatever text here" };
 
 		var data = repo.GetCommentsForPost(postData);
 
 		Assert.AreEqual(0, data.Count);
 	}
+
 }
