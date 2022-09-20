@@ -12,8 +12,13 @@ namespace FA.JustBlog.Core.Data
     {
         public AppDbContext()
         {
-            
-        }
+			Categories = Set<Categories>();
+			Comments = Set<Comments>();
+			Posts = Set<Posts>();
+			Tags = Set<Tags>();
+			PostTags = Set<PostTag>();
+
+		}
 
         public DbSet<Categories> Categories { get; set; }
         public DbSet<Comments> Comments { get; set; }

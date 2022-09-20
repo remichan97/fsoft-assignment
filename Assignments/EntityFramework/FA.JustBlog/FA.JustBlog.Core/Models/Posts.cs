@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,11 @@ namespace FA.JustBlog.Core.Models
         public string UrlSlug { get; set; }
         public bool Published { get; set; }
         public DateTime PostedOn { get; set; }
-        public virtual Categories Categories { get; set; }
+		public virtual Categories Categories { get; set; }
         public int ViewCount { get; set; }
         public double RateCount { get; set; }
-        public double TotalRate { get; set; }
-        [StringLength(5000)]
+		public double TotalRate { get; set; }
+		[StringLength(5000)]
         public string PostContent { get; set; }
 		public virtual ICollection<PostTag> PostTags { get; set; } = new List<PostTag>();
 		public virtual ICollection<Comments> Comments { get; set; } = new List<Comments>();

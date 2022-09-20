@@ -45,7 +45,7 @@ namespace FA.JustBlog.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("FA.JustBlog.Core.Models.Comments", b =>
@@ -84,7 +84,7 @@ namespace FA.JustBlog.Core.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("FA.JustBlog.Core.Models.Posts", b =>
@@ -139,7 +139,7 @@ namespace FA.JustBlog.Core.Migrations
 
                     b.HasIndex("CategoriesId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("FA.JustBlog.Core.Models.PostTag", b =>
@@ -154,7 +154,7 @@ namespace FA.JustBlog.Core.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("PostTags");
+                    b.ToTable("PostTags", (string)null);
                 });
 
             modelBuilder.Entity("FA.JustBlog.Core.Models.Tags", b =>
@@ -180,7 +180,7 @@ namespace FA.JustBlog.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags");
+                    b.ToTable("Tags", (string)null);
                 });
 
             modelBuilder.Entity("FA.JustBlog.Core.Models.Comments", b =>
