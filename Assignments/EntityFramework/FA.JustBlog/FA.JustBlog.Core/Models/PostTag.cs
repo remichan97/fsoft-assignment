@@ -1,12 +1,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FA.JustBlog.Core.Models
 {
-    public class PostTag
+	public class PostTag
     {
         [ForeignKey("Posts")]
         public Guid PostId { get; set; }

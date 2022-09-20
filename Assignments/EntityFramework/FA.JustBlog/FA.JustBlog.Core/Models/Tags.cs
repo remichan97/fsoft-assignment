@@ -1,12 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FA.JustBlog.Core.Models
 {
-    public class Tags
+	public class Tags
     {
         [Key]
 		public Guid Id { get; set; } = Guid.NewGuid();

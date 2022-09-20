@@ -1,17 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FA.JustBlog.Core.Configurations;
 using FA.JustBlog.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FA.JustBlog.Core.Data
 {
-    public class AppDbContext : DbContext
+	public class AppDbContext : DbContext
     {
         public AppDbContext()
-        {
+        {   
+            //Need this for moq else it would just complaint about Object reference not set to an instance of an object
 			Categories = Set<Categories>();
 			Comments = Set<Comments>();
 			Posts = Set<Posts>();

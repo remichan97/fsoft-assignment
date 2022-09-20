@@ -27,9 +27,9 @@ public class Tests
 
 	private IQueryable<Tags> tagList = new List<Tags>()
 	{
-		new Tags {Id = Guid.Parse("80fa9998-ca7b-4971-bce1-15f0688034c0"),Name = "Tag1", UrlSlug = "tag-1", Description = "A Demo tag"},
+		new Tags {Id = Guid.Parse("80fa9998-ca7b-4971-bce1-15f0688034c0"), Name = "Tag1", UrlSlug = "tag-1", Description = "A Demo tag"},
 		new Tags {Id = Guid.Parse("ab0cbc9d-14e3-4c3b-a0d7-a28bd2ad471b"), Name = "Tag2", UrlSlug = "tag-2", Description = "A Demo tag"},
-		new Tags {Id = Guid.Parse("b32db558-8e83-47f7-94dd-b27678cf98ba"),Name = "Tag3", UrlSlug = "tag-3", Description = "A Demo tag"}
+		new Tags {Id = Guid.Parse("b32db558-8e83-47f7-94dd-b27678cf98ba"), Name = "Tag3", UrlSlug = "tag-3", Description = "A Demo tag"}
 	}.AsQueryable();
 
 	private IQueryable<PostTag> postTags = new List<PostTag>()
@@ -40,7 +40,7 @@ public class Tests
 
 	private IQueryable<Comments> commentsList = new List<Comments>()
 	{
-
+		new Comments {},
 	}.AsQueryable();
 
 	[SetUp]
@@ -69,7 +69,7 @@ public class Tests
 		mockComment.As<IQueryable<Comments>>().Setup(m => m.Expression).Returns(commentsList.Expression);
 		mockComment.As<IQueryable<Comments>>().Setup(m => m.ElementType).Returns(commentsList.ElementType);
 		mockComment.As<IQueryable<Comments>>().Setup(m => m.GetEnumerator()).Returns(() => commentsList.GetEnumerator());
-		
+
 
 		mockContext = new Mock<AppDbContext>();
 		mockContext.Setup(it => it.Set<Posts>()).Returns(value: mockPosts.Object);
@@ -206,4 +206,47 @@ public class Tests
 		Assert.IsNull(data);
 	}
 
+	[Test]
+	public void GetCommentsForPost_WhenPassingValidPostId_ReturnsCommentsForRespectivePost()
+	{
+		var repo = new CommentsRepository(mockContext.Object);
+
+		var data = repo.GetCommentsForPost(Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aede"));
+
+		Assert.AreEqual(0, data.Count);
+	}
+
+	[Test]
+	public void GetCommentsForPost_WhenPassingNonExistsPostId_ReturnsEmpty()
+	{
+		var repo = new CommentsRepository(mockContext.Object);
+
+		var data = repo.GetCommentsForPost(Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aedd"));
+
+		Assert.AreEqual(0, data.Count);
+	}
+
+	[Test]
+	public void GetCommentsForPost_WhenPassAnExistPostObject_ReturnCommentsForPost()
+	{
+		var repo = new CommentsRepository(mockContext.Object);
+
+		Posts postData = new Posts { };
+
+		var data = repo.GetCommentsForPost(postData);
+
+		Assert.AreEqual(0, data.Count);
+	}
+
+	[Test]
+	public void GetCommentsForPost_WhenPassAnNonExistPostObject_ReturnEmptyList()
+	{
+		var repo = new CommentsRepository(mockContext.Object);
+
+		Posts postData = new Posts { };
+
+		var data = repo.GetCommentsForPost(postData);
+
+		Assert.AreEqual(0, data.Count);
+	}
 }
