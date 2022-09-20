@@ -13,6 +13,8 @@ public class Tests
 	private Mock<DbSet<Tags>> mockTags;
 
 	private Mock<DbSet<PostTag>> mockPostTag;
+	private Mock<DbSet<Comments>> mockComment;
+
 	private Mock<AppDbContext> mockContext;
 
 	private PostsRepository repo;
@@ -36,6 +38,11 @@ public class Tests
 		new PostTag {PostId = Guid.Parse("8c61ae9e-6ea9-4bfe-bc59-9e75293c3026"), TagId = Guid.Parse("80fa9998-ca7b-4971-bce1-15f0688034c0")},
 	}.AsQueryable();
 
+	private IQueryable<Comments> commentsList = new List<Comments>()
+	{
+
+	}.AsQueryable();
+
 	[SetUp]
 	public void Setup()
 	{
@@ -57,10 +64,18 @@ public class Tests
 		mockPostTag.As<IQueryable<PostTag>>().Setup(m => m.ElementType).Returns(postTags.ElementType);
 		mockPostTag.As<IQueryable<PostTag>>().Setup(m => m.GetEnumerator()).Returns(() => postTags.GetEnumerator());
 
+		mockComment = new Mock<DbSet<Comments>>();
+		mockComment.As<IQueryable<Comments>>().Setup(m => m.Provider).Returns(commentsList.Provider);
+		mockComment.As<IQueryable<Comments>>().Setup(m => m.Expression).Returns(commentsList.Expression);
+		mockComment.As<IQueryable<Comments>>().Setup(m => m.ElementType).Returns(commentsList.ElementType);
+		mockComment.As<IQueryable<Comments>>().Setup(m => m.GetEnumerator()).Returns(() => commentsList.GetEnumerator());
+		
+
 		mockContext = new Mock<AppDbContext>();
 		mockContext.Setup(it => it.Set<Posts>()).Returns(value: mockPosts.Object);
 		mockContext.Setup(it => it.Set<PostTag>()).Returns(value: mockPostTag.Object);
 		mockContext.Setup(it => it.Set<Tags>()).Returns(value: mockTags.Object);
+		mockContext.Setup(it => it.Set<Comments>()).Returns(value: mockComment.Object);
 
 
 		repo = new PostsRepository(mockContext.Object);
@@ -167,6 +182,26 @@ public class Tests
 	public void FindPost_ReturnsNullIfNotFoundForCriteria()
 	{
 		var data = repo.FindPost(2022, 4, "post-1");
+
+		Assert.IsNull(data);
+	}
+
+	[Test]
+	public void GetTagsByUrlSlugs_WhenPassingExistedUrlSlugs_ReturnTag()
+	{
+		var repo = new TagsRepository(mockContext.Object);
+
+		var data = repo.GetTagsByUrlSlugs("tag-1");
+
+		Assert.IsNotNull(data);
+	}
+
+	[Test]
+	public void GetTagsByUrlSlugs_WhenPassingNonExistedUrlSlugs_ReturnNull()
+	{
+		var repo = new TagsRepository(mockContext.Object);
+
+		var data = repo.GetTagsByUrlSlugs("tag-5");
 
 		Assert.IsNull(data);
 	}
