@@ -15,6 +15,8 @@ public class Tests
 	private Mock<DbSet<PostTag>> mockPostTag;
 	private Mock<AppDbContext> mockContext;
 
+	private PostsRepository repo;
+
 	private IQueryable<Posts> postList = new List<Posts>() {
 		new Posts{Id = Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aede"), Title = "A Post number 1", Meta = "Test", UrlSlug = "post-1", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories {Id = Guid.NewGuid(), Name = "Cat1"}, TotalRate = 50, PostContent = "A whatever text here"},
 		new Posts{Id = Guid.Parse("8c61ae9e-6ea9-4bfe-bc59-9e75293c3026"),Title = "A Post number 2", Meta = "Test", UrlSlug = "post-2", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories {Id = Guid.NewGuid(), Name = "Cat1"}, TotalRate = 50, PostContent = "A whatever text here"},
@@ -56,15 +58,17 @@ public class Tests
 		mockPostTag.As<IQueryable<PostTag>>().Setup(m => m.GetEnumerator()).Returns(() => postTags.GetEnumerator());
 
 		mockContext = new Mock<AppDbContext>();
-		mockContext.Setup(it => it.Set<Posts>()).Returns(mockPosts.Object);
+		mockContext.Setup(it => it.Set<Posts>()).Returns(value: mockPosts.Object);
+		mockContext.Setup(it => it.Set<PostTag>()).Returns(value: mockPostTag.Object);
+		mockContext.Setup(it => it.Set<Tags>()).Returns(value: mockTags.Object);
 
 
+		repo = new PostsRepository(mockContext.Object);
 	}
 
 	[Test]
 	public void GetPublishedPosts_ReturnPublishedPosts()
 	{
-		var repo = new PostsRepository(mockContext.Object);
 
 		var data = repo.GetPublishedPosts();
 
@@ -74,8 +78,6 @@ public class Tests
 	[Test]
 	public void GetPublishedPosts_ReturnUnpublishedPosts()
 	{
-		var repo = new PostsRepository(mockContext.Object);
-
 		var data = repo.GetUnpublishedPosts();
 
 		Assert.AreEqual(1, data.Count);
@@ -84,8 +86,6 @@ public class Tests
 	[Test]
 	public void GetPostsByMonth_ReturnsPostsMadeOnThatMonth()
 	{
-		var repo = new PostsRepository(mockContext.Object);
-
 		var data = repo.GetPostsByMonth(DateTime.Today);
 
 		Assert.AreEqual(2, data.Count);
@@ -94,8 +94,6 @@ public class Tests
 	[Test]
 	public void GetLatestPosts_WhenPassedNegativeInteger_ReturnEmpty()
 	{
-		var repo = new PostsRepository(mockContext.Object);
-
 		var data = repo.GetLatestPosts(-1);
 
 		Assert.AreEqual(0, data.Count);
@@ -104,8 +102,6 @@ public class Tests
 	[Test]
 	public void GetLatestPosts_WhenPassedANumberMoreThanRowCount_ReturnAllPosts()
 	{
-		var repo = new PostsRepository(mockContext.Object);
-
 		var data = repo.GetLatestPosts(5);
 
 		Assert.AreEqual(postList.Count(), data.Count);
@@ -114,8 +110,6 @@ public class Tests
 	[Test]
 	public void CountPostsByCategory_ReturnsNumberOfPostsInCategory()
 	{
-		var repo = new PostsRepository(mockContext.Object);
-
 		var data = repo.CountPostsByCategory("Cat1");
 
 		Assert.AreEqual(2, data);
@@ -124,8 +118,6 @@ public class Tests
 	[Test]
 	public void CountPostsByCategory_WhenEnterNonExistenceCategory_ReturnsZero()
 	{
-		var repo = new PostsRepository(mockContext.Object);
-
 		var data = repo.CountPostsByCategory("Cat4");
 
 		Assert.AreEqual(0, data);
@@ -134,8 +126,6 @@ public class Tests
 	[Test]
 	public void GetPostsByCategory_ReturnPostsBelongsToCategory()
 	{
-		var repo = new PostsRepository(mockContext.Object);
-
 		var data = repo.GetPostsByCategory("Cat1");
 
 		Assert.AreEqual(2, data.Count);
@@ -144,8 +134,6 @@ public class Tests
 	[Test]
 	public void GetPostsByCategory_WhenEnterNonExistenceCategory_ReturnEmpty()
 	{
-		var repo = new PostsRepository(mockContext.Object);
-
 		var data = repo.GetPostsByCategory("Cat4");
 
 		Assert.AreEqual(0, data.Count);
@@ -154,9 +142,7 @@ public class Tests
 	[Test]
 	public void GetPostsByTag_WhenPassingExistedTags_ReturnPostsMatchedTags()
 	{
-		var repo = new PostsRepository(mockContext.Object);
-
-		var data = repo.GetPostsByTag("tag-1");
+		var data = repo.GetPostsByTag("Tag1");
 
 		Assert.AreEqual(2, data.Count);
 	}
@@ -164,9 +150,7 @@ public class Tests
 	[Test]
 	public void GetPostsByTag_WhenPassingNonExistedTags_ReturnEmpty()
 	{
-		var repo = new PostsRepository(mockContext.Object);
-
-		var data = repo.GetPostsByTag("tag-7");
+		var data = repo.GetPostsByTag("Tag7");
 
 		Assert.AreEqual(0, data.Count);
 	}
@@ -174,8 +158,6 @@ public class Tests
 	[Test]
 	public void FindPost_ReturnsPostMatchCriteria()
 	{
-		var repo = new PostsRepository(mockContext.Object);
-
 		var data = repo.FindPost(2022, 4, "post-3");
 
 		Assert.IsNotNull(data);
@@ -184,8 +166,6 @@ public class Tests
 	[Test]
 	public void FindPost_ReturnsNullIfNotFoundForCriteria()
 	{
-		var repo = new PostsRepository(mockContext.Object);
-
 		var data = repo.FindPost(2022, 4, "post-1");
 
 		Assert.IsNull(data);
