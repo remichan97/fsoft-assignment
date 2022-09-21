@@ -4,6 +4,7 @@ using FA.JustBlog.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FA.JustBlog.Core.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220921065354_AddUniqueConstraint")]
+    partial class AddUniqueConstraint
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,29 +48,6 @@ namespace FA.JustBlog.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("37b2a62e-b9b8-456c-bcce-6c30c696575f"),
-                            Description = "Demo category",
-                            Name = "Category 1",
-                            UrlSlug = "cat-1"
-                        },
-                        new
-                        {
-                            Id = new Guid("59918479-bfae-4794-8477-b5c0f4ad05e2"),
-                            Description = "Demo category",
-                            Name = "Category 2",
-                            UrlSlug = "cat-2"
-                        },
-                        new
-                        {
-                            Id = new Guid("0549b13b-668a-4556-8176-e3d9abbbbefe"),
-                            Description = "Demo category",
-                            Name = "Category 3",
-                            UrlSlug = "cat-3"
-                        });
                 });
 
             modelBuilder.Entity("FA.JustBlog.Core.Models.Comments", b =>
@@ -108,38 +87,6 @@ namespace FA.JustBlog.Core.Migrations
                     b.HasIndex("PostId");
 
                     b.ToTable("Comments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("a6f99cf6-556a-421b-bdc5-71bb43019f4b"),
-                            CommentHeader = "Header",
-                            CommentText = "A Comment Body",
-                            CommentTime = new DateTime(2022, 9, 21, 14, 13, 53, 365, DateTimeKind.Local).AddTicks(5042),
-                            Email = "binhtruong@gmail.com",
-                            Name = "A Demo Comment 1",
-                            PostId = new Guid("18d6c8da-6d80-4b5c-a94f-66e32835aede")
-                        },
-                        new
-                        {
-                            Id = new Guid("c9476b14-3be7-4447-8260-28ece11fc5fb"),
-                            CommentHeader = "Header",
-                            CommentText = "A Comment Body",
-                            CommentTime = new DateTime(2022, 9, 21, 14, 13, 53, 365, DateTimeKind.Local).AddTicks(5046),
-                            Email = "binhtruong@gmail.com",
-                            Name = "A Demo Comment 2",
-                            PostId = new Guid("18d6c8da-6d80-4b5c-a94f-66e32835aede")
-                        },
-                        new
-                        {
-                            Id = new Guid("9b9f639c-b23d-4278-b80f-ce77a9e25714"),
-                            CommentHeader = "Header",
-                            CommentText = "A Comment Body",
-                            CommentTime = new DateTime(2022, 9, 21, 14, 13, 53, 365, DateTimeKind.Local).AddTicks(5049),
-                            Email = "binhtruong@gmail.com",
-                            Name = "A Demo Comment 3",
-                            PostId = new Guid("18d6c8da-6d80-4b5c-a94f-66e32835aede")
-                        });
                 });
 
             modelBuilder.Entity("FA.JustBlog.Core.Models.Posts", b =>
@@ -198,53 +145,6 @@ namespace FA.JustBlog.Core.Migrations
                         .IsUnique();
 
                     b.ToTable("Posts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("18d6c8da-6d80-4b5c-a94f-66e32835aede"),
-                            CategoriesId = new Guid("37b2a62e-b9b8-456c-bcce-6c30c696575f"),
-                            Meta = "Test",
-                            PostContent = "A whatever text here",
-                            PostedOn = new DateTime(2022, 9, 21, 14, 13, 53, 365, DateTimeKind.Local).AddTicks(4792),
-                            Published = true,
-                            RateCount = 4.5,
-                            ShortDescription = "A Short Desc",
-                            Title = "A Post number 1",
-                            TotalRate = 50.0,
-                            UrlSlug = "post-1",
-                            ViewCount = 100
-                        },
-                        new
-                        {
-                            Id = new Guid("8c61ae9e-6ea9-4bfe-bc59-9e75293c3026"),
-                            CategoriesId = new Guid("37b2a62e-b9b8-456c-bcce-6c30c696575f"),
-                            Meta = "Test",
-                            PostContent = "A whatever text here",
-                            PostedOn = new DateTime(2022, 9, 21, 14, 13, 53, 365, DateTimeKind.Local).AddTicks(4812),
-                            Published = true,
-                            RateCount = 4.5,
-                            ShortDescription = "A Short Desc",
-                            Title = "A Post number 2",
-                            TotalRate = 50.0,
-                            UrlSlug = "post-2",
-                            ViewCount = 100
-                        },
-                        new
-                        {
-                            Id = new Guid("45cf481f-d98c-471e-b235-d0a9f3b0cfcb"),
-                            CategoriesId = new Guid("59918479-bfae-4794-8477-b5c0f4ad05e2"),
-                            Meta = "Test",
-                            PostContent = "A whatever text here",
-                            PostedOn = new DateTime(2022, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Published = false,
-                            RateCount = 0.0,
-                            ShortDescription = "A Short Desc",
-                            Title = "A Post number 3",
-                            TotalRate = 0.0,
-                            UrlSlug = "post-3",
-                            ViewCount = 0
-                        });
                 });
 
             modelBuilder.Entity("FA.JustBlog.Core.Models.PostTag", b =>
@@ -260,23 +160,6 @@ namespace FA.JustBlog.Core.Migrations
                     b.HasIndex("TagId");
 
                     b.ToTable("PostTags");
-
-                    b.HasData(
-                        new
-                        {
-                            PostId = new Guid("18d6c8da-6d80-4b5c-a94f-66e32835aede"),
-                            TagId = new Guid("80fa9998-ca7b-4971-bce1-15f0688034c0")
-                        },
-                        new
-                        {
-                            PostId = new Guid("18d6c8da-6d80-4b5c-a94f-66e32835aede"),
-                            TagId = new Guid("b32db558-8e83-47f7-94dd-b27678cf98ba")
-                        },
-                        new
-                        {
-                            PostId = new Guid("8c61ae9e-6ea9-4bfe-bc59-9e75293c3026"),
-                            TagId = new Guid("80fa9998-ca7b-4971-bce1-15f0688034c0")
-                        });
                 });
 
             modelBuilder.Entity("FA.JustBlog.Core.Models.Tags", b =>
@@ -306,32 +189,6 @@ namespace FA.JustBlog.Core.Migrations
                         .IsUnique();
 
                     b.ToTable("Tags");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("80fa9998-ca7b-4971-bce1-15f0688034c0"),
-                            Count = 0,
-                            Description = "A Demo tag",
-                            Name = "Tag1",
-                            UrlSlug = "tag-1"
-                        },
-                        new
-                        {
-                            Id = new Guid("ab0cbc9d-14e3-4c3b-a0d7-a28bd2ad471b"),
-                            Count = 0,
-                            Description = "A Demo tag",
-                            Name = "Tag2",
-                            UrlSlug = "tag-2"
-                        },
-                        new
-                        {
-                            Id = new Guid("b32db558-8e83-47f7-94dd-b27678cf98ba"),
-                            Count = 0,
-                            Description = "A Demo tag",
-                            Name = "Tag3",
-                            UrlSlug = "tag-3"
-                        });
                 });
 
             modelBuilder.Entity("FA.JustBlog.Core.Models.Comments", b =>

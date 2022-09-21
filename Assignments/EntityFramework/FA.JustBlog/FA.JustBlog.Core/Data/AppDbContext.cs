@@ -9,11 +9,11 @@ namespace FA.JustBlog.Core.Data
 		public AppDbContext()
 		{
 			//Need this for moq else it would just complaint about Object reference not set to an instance of an object
-			Categories = Set<Categories>();
-			Comments = Set<Comments>();
-			Posts = Set<Posts>();
-			Tags = Set<Tags>();
-			PostTags = Set<PostTag>();
+			// Categories = Set<Categories>();
+			// Comments = Set<Comments>();
+			// Posts = Set<Posts>();
+			// Tags = Set<Tags>();
+			// PostTags = Set<PostTag>();
 
 		}
 
@@ -35,6 +35,8 @@ namespace FA.JustBlog.Core.Data
 			modelBuilder.ApplyConfigurationsFromAssembly(typeof(PostTagConfiguration).Assembly);
 			modelBuilder.ApplyConfigurationsFromAssembly(typeof(PostsConfiguration).Assembly);
 			modelBuilder.ApplyConfigurationsFromAssembly(typeof(TagsConfiguration).Assembly);
+
+			modelBuilder.SeedData();
 		}
 	}
 }

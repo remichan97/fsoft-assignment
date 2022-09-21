@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
 namespace FA.JustBlog.Core.Models
@@ -15,6 +16,8 @@ namespace FA.JustBlog.Core.Models
 		public string UrlSlug { get; set; }
 		public bool Published { get; set; }
 		public DateTime PostedOn { get; set; }
+		[ForeignKey("Categories")]
+		public Guid CategoriesId { get; set; }
 		public virtual Categories Categories { get; set; }
 		public int ViewCount { get; set; }
 		public double RateCount { get; set; }

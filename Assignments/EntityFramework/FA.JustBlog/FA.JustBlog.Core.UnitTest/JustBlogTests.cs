@@ -78,6 +78,11 @@ public class Tests
 		mockContext.Setup(it => it.Set<Tags>()).Returns(value: mockTags.Object);
 		mockContext.Setup(it => it.Set<Comments>()).Returns(value: mockComment.Object);
 
+		mockContext.Object.Posts = mockContext.Object.Set<Posts>();
+		mockContext.Object.PostTags = mockContext.Object.Set<PostTag>();
+		mockContext.Object.Tags = mockContext.Object.Set<Tags>();
+		mockContext.Object.Comments = mockContext.Object.Set<Comments>();
+
 
 		repo = new PostsRepository(mockContext.Object);
 	}
