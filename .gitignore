@@ -366,3 +366,5 @@ FodyWeavers.xsd
 /Materials
 /*.xls
 /*.xlsx
+/Assignments/**/*.zip
+/Assignments/**/*.rar
