@@ -40,8 +40,6 @@ namespace FA.JustBlog.Core.UnitTest
 		[Test]
 		public void GetTagsByUrlSlugs_WhenPassingExistedUrlSlugs_ReturnTag()
 		{
-			var repo = new TagsRepository(mockContext.Object);
-
 			var data = repo.GetTagsByUrlSlugs("tag-1");
 
 			Assert.IsNotNull(data);
@@ -50,8 +48,6 @@ namespace FA.JustBlog.Core.UnitTest
 		[Test]
 		public void GetTagsByUrlSlugs_WhenPassingNonExistedUrlSlugs_ReturnNull()
 		{
-			var repo = new TagsRepository(mockContext.Object);
-
 			var data = repo.GetTagsByUrlSlugs("tag-5");
 
 			Assert.IsNull(data);

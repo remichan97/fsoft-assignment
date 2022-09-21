@@ -61,8 +61,6 @@ namespace FA.JustBlog.Core.UnitTest
 		[Test]
 		public void GetCommentsForPost_WhenPassingValidPostId_ReturnsCommentsForRespectivePost()
 		{
-			var repo = new CommentsRepository(mockContext.Object);
-
 			var data = repo.GetCommentsForPost(Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aede"));
 
 			Assert.That(data.Count, Is.EqualTo(2));
@@ -71,8 +69,6 @@ namespace FA.JustBlog.Core.UnitTest
 		[Test]
 		public void GetCommentsForPost_WhenPassingNonExistsPostId_ReturnsEmpty()
 		{
-			var repo = new CommentsRepository(mockContext.Object);
-
 			var data = repo.GetCommentsForPost(Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aedd"));
 
 			Assert.That(data.Count, Is.EqualTo(0));
@@ -81,8 +77,6 @@ namespace FA.JustBlog.Core.UnitTest
 		[Test]
 		public void GetCommentsForPost_WhenPassAnExistPostObject_ReturnCommentsForPost()
 		{
-			var repo = new CommentsRepository(mockContext.Object);
-
 			Posts postData = new Posts { Id = Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aede"), Title = "A Post number 1", Meta = "Test", UrlSlug = "post-1", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories { Id = Guid.NewGuid(), Name = "Cat1" }, TotalRate = 50, PostContent = "A whatever text here" };
 
 			var data = repo.GetCommentsForPost(postData);
@@ -93,9 +87,7 @@ namespace FA.JustBlog.Core.UnitTest
 		[Test]
 		public void GetCommentsForPost_WhenPassANonExistPostObject_ReturnEmptyList()
 		{
-			var repo = new CommentsRepository(mockContext.Object);
-
-			Posts postData = new Posts { Id = Guid.Parse("8967f772-a6d7-4ff2-845c-a93c30169aae"), Title = "A Post number 6", Meta = "Test", UrlSlug = "post-1", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories { Id = Guid.NewGuid(), Name = "Cat1" }, TotalRate = 50, PostContent = "A whatever text here" };
+			Posts postData = new() { Id = Guid.Parse("8967f772-a6d7-4ff2-845c-a93c30169aae"), Title = "A Post number 6", Meta = "Test", UrlSlug = "post-1", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories { Id = Guid.NewGuid(), Name = "Cat1" }, TotalRate = 50, PostContent = "A whatever text here" };
 
 			var data = repo.GetCommentsForPost(postData);
 
@@ -105,9 +97,7 @@ namespace FA.JustBlog.Core.UnitTest
 		[Test]
 		public void GetCommentsForPost_WhenPassAnExistPostObjectWithoutAnyComment_ReturnEmptyList()
 		{
-			var repo = new CommentsRepository(mockContext.Object);
-
-			Posts postData = new Posts { Id = Guid.Parse("8c61ae9e-6ea9-4bfe-bc59-9e75293c3026"), Title = "A Post number 2", Meta = "Test", UrlSlug = "post-2", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories { Id = Guid.NewGuid(), Name = "Cat1" }, TotalRate = 50, PostContent = "A whatever text here" };
+			Posts postData = new() { Id = Guid.Parse("8c61ae9e-6ea9-4bfe-bc59-9e75293c3026"), Title = "A Post number 2", Meta = "Test", UrlSlug = "post-2", Published = true, PostedOn = DateTime.Now, ViewCount = 100, RateCount = 4.5, Categories = new Categories { Id = Guid.NewGuid(), Name = "Cat1" }, TotalRate = 50, PostContent = "A whatever text here" };
 
 			var data = repo.GetCommentsForPost(postData);
 

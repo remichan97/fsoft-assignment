@@ -163,7 +163,7 @@ public class JustBlogPostsTests
 	{
 		var data = repo.FindPost(2022, 4, "post-3");
 
-		Assert.IsNotNull(data);
+		Assert.That(data, Is.Not.Null);
 	}
 
 	[Test]
@@ -171,7 +171,7 @@ public class JustBlogPostsTests
 	{
 		var data = repo.FindPost(2022, 4, "post-1");
 
-		Assert.IsNull(data);
+		Assert.That(data, Is.Null);
 	}
 
 }
