@@ -8,8 +8,8 @@ namespace FA.JustBlog.Core.Infrastructure
 		protected readonly AppDbContext _DbContext;
 		protected DbSet<TEntity> DbSet;
 
-        public BaseRepository(AppDbContext context)
-        {
+		public BaseRepository(AppDbContext context)
+		{
 			this._DbContext = context;
 			this.DbSet = context.Set<TEntity>();
 		}
@@ -32,7 +32,7 @@ namespace FA.JustBlog.Core.Infrastructure
 		public void Delete(params object[] ids)
 		{
 			var entities = DbSet.Find(ids);
-            if (entities is null) throw new ArgumentException($"{string.Join(";", ids)} does not exists in the {typeof(TEntity).Name} table");
+			if (entities is null) throw new ArgumentException($"{string.Join(";", ids)} does not exists in the {typeof(TEntity).Name} table");
 			DbSet.Remove(entities);
 		}
 

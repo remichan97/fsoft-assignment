@@ -13,8 +13,8 @@ namespace FA.JustBlog.Core.Infrastructure
 		private ICommentsRepository _commentRepository;
 		private ITagsRepository _tagsRepository;
 
-        public UnitOfWork(AppDbContext context)
-        {
+		public UnitOfWork(AppDbContext context)
+		{
 			this._context = context;
 		}
 
