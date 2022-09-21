@@ -93,7 +93,7 @@ public class Tests
 
 		var data = repo.GetPublishedPosts();
 
-		Assert.AreEqual(2, data.Count);
+		Assert.That(data.Count, Is.EqualTo(2));
 	}
 
 	[Test]
@@ -101,7 +101,7 @@ public class Tests
 	{
 		var data = repo.GetUnpublishedPosts();
 
-		Assert.AreEqual(1, data.Count);
+		Assert.That(data.Count, Is.EqualTo(1));
 	}
 
 	[Test]
@@ -109,7 +109,7 @@ public class Tests
 	{
 		var data = repo.GetPostsByMonth(DateTime.Today);
 
-		Assert.AreEqual(2, data.Count);
+		Assert.That(data.Count, Is.EqualTo(2));
 	}
 
 	[Test]
@@ -117,7 +117,7 @@ public class Tests
 	{
 		var data = repo.GetLatestPosts(-1);
 
-		Assert.AreEqual(0, data.Count);
+		Assert.That(data.Count, Is.EqualTo(0));
 	}
 
 	[Test]
@@ -125,7 +125,7 @@ public class Tests
 	{
 		var data = repo.GetLatestPosts(5);
 
-		Assert.AreEqual(postList.Count(), data.Count);
+		Assert.That(data.Count, Is.EqualTo(postList.Count()));
 	}
 
 	[Test]
@@ -133,7 +133,7 @@ public class Tests
 	{
 		var data = repo.CountPostsByCategory("Cat1");
 
-		Assert.AreEqual(2, data);
+		Assert.That(data, Is.EqualTo(2));
 	}
 
 	[Test]
@@ -141,7 +141,7 @@ public class Tests
 	{
 		var data = repo.CountPostsByCategory("Cat4");
 
-		Assert.AreEqual(0, data);
+		Assert.That(data, Is.EqualTo(0));
 	}
 
 	[Test]
@@ -149,7 +149,7 @@ public class Tests
 	{
 		var data = repo.GetPostsByCategory("Cat1");
 
-		Assert.AreEqual(2, data.Count);
+		Assert.That(data.Count, Is.EqualTo(2));
 	}
 
 	[Test]
@@ -157,7 +157,7 @@ public class Tests
 	{
 		var data = repo.GetPostsByCategory("Cat4");
 
-		Assert.AreEqual(0, data.Count);
+		Assert.That(data.Count, Is.EqualTo(0));
 	}
 
 	[Test]
@@ -165,7 +165,7 @@ public class Tests
 	{
 		var data = repo.GetPostsByTag("Tag1");
 
-		Assert.AreEqual(2, data.Count);
+		Assert.That(data.Count, Is.EqualTo(2));
 	}
 
 	[Test]
@@ -173,7 +173,7 @@ public class Tests
 	{
 		var data = repo.GetPostsByTag("Tag7");
 
-		Assert.AreEqual(0, data.Count);
+		Assert.That(data.Count, Is.EqualTo(0));
 	}
 
 	[Test]
@@ -219,7 +219,7 @@ public class Tests
 
 		var data = repo.GetCommentsForPost(Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aede"));
 
-		Assert.AreEqual(2, data.Count);
+		Assert.That(data.Count, Is.EqualTo(2));
 	}
 
 	[Test]
@@ -229,7 +229,7 @@ public class Tests
 
 		var data = repo.GetCommentsForPost(Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aedd"));
 
-		Assert.AreEqual(0, data.Count);
+		Assert.That(data.Count, Is.EqualTo(0));
 	}
 
 	[Test]
@@ -241,7 +241,7 @@ public class Tests
 
 		var data = repo.GetCommentsForPost(postData);
 
-		Assert.AreEqual(2, data.Count);
+		Assert.That(data.Count, Is.EqualTo(2));
 	}
 
 	[Test]
@@ -253,7 +253,7 @@ public class Tests
 
 		var data = repo.GetCommentsForPost(postData);
 
-		Assert.AreEqual(0, data.Count);
+		Assert.That(data.Count, Is.EqualTo(0));
 	}
 
 	[Test]
@@ -265,7 +265,7 @@ public class Tests
 
 		var data = repo.GetCommentsForPost(postData);
 
-		Assert.AreEqual(0, data.Count);
+		Assert.That(data.Count, Is.EqualTo(0));
 	}
 
 }

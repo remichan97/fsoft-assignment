@@ -17,6 +17,8 @@ namespace FA.JustBlog.Core.Infrastructure
 		{
 			this._context = context;
 		}
+		
+		public AppDbContext AppDbContext => _context;
 
 		public ICategoriesRepository CategoriesRepository => _categoriesRepository ?? (_categoriesRepository = new CategoriesRepository(_context));
 
@@ -24,12 +26,9 @@ namespace FA.JustBlog.Core.Infrastructure
 
 		public IPostTagRepository PostTagRepository => _postTagRepository ?? (_postTagRepository = new PostTagRepository(_context));
 
-
 		public ICommentsRepository CommentsRepository => _commentRepository ?? (_commentRepository = new CommentsRepository(_context));
 
 		public ITagsRepository TagsRepository => _tagsRepository ?? (_tagsRepository = new TagsRepository(_context));
-
-		public AppDbContext AppDbContext => _context;
 
 		public void Dispose()
 		{
