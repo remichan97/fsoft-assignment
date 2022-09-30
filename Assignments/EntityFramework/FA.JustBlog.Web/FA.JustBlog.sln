@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FA.JustBlog.Core", "FA.Just
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FA.JustBlog.Core.UnitTest", "FA.JustBlog.Core.UnitTest\FA.JustBlog.Core.UnitTest.csproj", "{49CA2112-2900-457E-AA7F-B9D83903960B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FA.JustBlog", "FA.JustBlog\FA.JustBlog.csproj", "{A1A146F5-588C-4456-A38E-B65EFA537116}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FA.JustBlog.Services", "FA.JustBlog.Services\FA.JustBlog.Services.csproj", "{506CF77E-3E0D-482A-A748-42EDB4CCE88F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{49CA2112-2900-457E-AA7F-B9D83903960B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49CA2112-2900-457E-AA7F-B9D83903960B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49CA2112-2900-457E-AA7F-B9D83903960B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1A146F5-588C-4456-A38E-B65EFA537116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1A146F5-588C-4456-A38E-B65EFA537116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1A146F5-588C-4456-A38E-B65EFA537116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1A146F5-588C-4456-A38E-B65EFA537116}.Release|Any CPU.Build.0 = Release|Any CPU
+		{506CF77E-3E0D-482A-A748-42EDB4CCE88F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{506CF77E-3E0D-482A-A748-42EDB4CCE88F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{506CF77E-3E0D-482A-A748-42EDB4CCE88F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{506CF77E-3E0D-482A-A748-42EDB4CCE88F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
