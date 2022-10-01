@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\FA.JustBlog.Core\FA.JustBlog.Core.csproj" />
-    <ProjectReference Include="..\FA.JustBlog.ViewModels\FA.JustBlog.ViewModels.csproj" />
-  </ItemGroup>
-
 </Project>

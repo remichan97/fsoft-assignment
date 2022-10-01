@@ -35,9 +35,9 @@ namespace FA.JustBlog.Core.Infrastructure
 			_context.Dispose();
 		}
 
-		public int SaveChanges()
+		public async Task<int> SaveChanges()
 		{
-			return _context.SaveChanges();
+			return await _context.SaveChangesAsync();
 		}
 	}
 }

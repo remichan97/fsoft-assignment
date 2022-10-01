@@ -2,6 +2,7 @@ using FA.JustBlog.Core.Data;
 using FA.JustBlog.Core.Infrastructure;
 using FA.JustBlog.Core.IRepository;
 using FA.JustBlog.Core.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FA.JustBlog.Core.Repository
 {
@@ -11,24 +12,24 @@ namespace FA.JustBlog.Core.Repository
 		{
 		}
 
-		public IList<Posts> GetPublishedPosts()
+		public async Task<IList<Posts>> GetPublishedPosts()
 		{
-			return _DbContext.Posts.Where(it => it.Published == true).ToList();
+			return await _DbContext.Posts.Where(it => it.Published == true).ToListAsync();
 		}
 
-		public IList<Posts> GetUnpublishedPosts()
+		public async Task<IList<Posts>> GetUnpublishedPosts()
 		{
-			return _DbContext.Posts.Where(it => it.Published == false).ToList();
+			return await _DbContext.Posts.Where(it => it.Published == false).ToListAsync();
 		}
 
-		public IList<Posts> GetLatestPosts(int size)
+		public async Task<IList<Posts>> GetLatestPosts(int size)
 		{
-			return _DbContext.Posts.OrderByDescending(it => it.PostedOn).Take(size).ToList();
+			return await _DbContext.Posts.OrderByDescending(it => it.PostedOn).Take(size).ToListAsync();
 		}
 
-		public IList<Posts> GetPostsByMonth(DateTime monthYear)
+		public async Task<IList<Posts>> GetPostsByMonth(DateTime monthYear)
 		{
-			return _DbContext.Posts.Where(it => it.PostedOn.Month == monthYear.Month).ToList();
+			return await _DbContext.Posts.Where(it => it.PostedOn.Month == monthYear.Month).ToListAsync();
 		}
 
 		public int CountPostsByCategory(string category)
@@ -48,16 +49,16 @@ namespace FA.JustBlog.Core.Repository
 			return query.Count();
 		}
 
-		public IList<Posts> GetPostsByTag(string tag)
+		public async Task<IList<Posts>> GetPostsByTag(string tag)
 		{
 			var query = from data in _DbContext.Posts join pt in _DbContext.PostTags on data.Id equals pt.PostId join tags in _DbContext.Tags on pt.TagId equals tags.Id where tags.Name.Equals(tag) select data;
 
-			return query.ToList();
+			return await query.ToListAsync();
 		}
 
-		public Posts FindPost(int year, int month, string urlSlug)
+		public async Task<Posts> FindPost(int year, int month, string urlSlug)
 		{
-			return _DbContext.Posts.FirstOrDefault(it => it.PostedOn.Year == year && it.PostedOn.Month == month && it.UrlSlug.Equals(urlSlug));
+			return await _DbContext.Posts.FirstOrDefaultAsync(it => it.PostedOn.Year == year && it.PostedOn.Month == month && it.UrlSlug.Equals(urlSlug));
 		}
 	}
 }

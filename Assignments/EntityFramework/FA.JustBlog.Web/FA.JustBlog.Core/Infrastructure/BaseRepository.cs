@@ -14,14 +14,14 @@ namespace FA.JustBlog.Core.Infrastructure
 			this.DbSet = context.Set<TEntity>();
 		}
 
-		public void Add(TEntity entity)
+		public async Task Add(TEntity entity)
 		{
-			DbSet.Add(entity);
+			await DbSet.AddAsync(entity);
 		}
 
-		public void CreateRange(List<TEntity> entities)
+		public async Task CreateRange(List<TEntity> entities)
 		{
-			DbSet.AddRange(entities);
+			await DbSet.AddRangeAsync(entities);
 		}
 
 		public void Delete(TEntity entity)
@@ -46,9 +46,9 @@ namespace FA.JustBlog.Core.Infrastructure
 			return DbSet;
 		}
 
-		public TEntity GetById(params object[] primaryKey)
+		public async Task<TEntity> GetById(params object[] primaryKey)
 		{
-			return DbSet.Find(primaryKey);
+			return await DbSet.FindAsync(primaryKey);
 		}
 
 		public void Update(TEntity entity)

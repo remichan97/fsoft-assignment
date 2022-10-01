@@ -18,6 +18,11 @@ namespace FA.JustBlog.Core.Data
 
 		}
 
+		public AppDbContext(DbContextOptions<AppDbContext> option) : base(option)
+		{
+
+		}
+
 		public DbSet<Categories> Categories { get; set; }
 		public DbSet<Comments> Comments { get; set; }
 		public DbSet<Posts> Posts { get; set; }
