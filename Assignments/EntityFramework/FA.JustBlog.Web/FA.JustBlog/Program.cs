@@ -1,5 +1,6 @@
 using FA.JustBlog.Core.Data;
 using FA.JustBlog.Core.Infrastructure;
+using FA.JustBlog.Services.Post;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 	.AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IPostService, PostService>();
 
 builder.Services.AddControllersWithViews();
 
