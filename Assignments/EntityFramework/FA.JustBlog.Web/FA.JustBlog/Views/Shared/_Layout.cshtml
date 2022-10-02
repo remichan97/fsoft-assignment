@@ -36,7 +36,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @foreach (var item in unitOfWork.CategoriesRepository.GetAll())
                             {
-                                <li><a class="dropdown-item" href="#">@item.Name</a></li>
+                                <li><a class="dropdown-item" asp-controller="Category" asp-action="Index" asp-route-name="@item.Name">@item.Name</a></li>
                             }
                         </ul>
                     </li>

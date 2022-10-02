@@ -1,5 +1,4 @@
 ﻿using FA.JustBlog.Services.Post;
-using FA.JustBlog.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FA.JustBlog.Controllers

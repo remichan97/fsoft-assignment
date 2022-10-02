@@ -43,7 +43,7 @@
             @foreach (var item in unitOfWork.TagsRepository.GetAll())
             {
                 <div class="col-sm-2">
-                    <span class="badge bg-info"><a href="#">@item.Name</a></span>
+                    <span class="badge bg-info"><a asp-controller="Tag" asp-action="Index" asp-route-name="@item.Name">@item.Name</a></span>
                 </div>
             }
         </div>

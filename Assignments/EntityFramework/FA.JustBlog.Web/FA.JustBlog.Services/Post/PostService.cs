@@ -33,6 +33,16 @@ namespace FA.JustBlog.Services.Post
 			return await _unitOfWork.PostsRepository.GetMostViewedPosts(size);
 		}
 
+		public async Task<IEnumerable<Posts>> GetPostsByCategory(string name)
+		{
+			return await _unitOfWork.PostsRepository.GetPostsByCategory(name);
+		}
+
+		public async Task<IEnumerable<Posts>> GetPostsByTag(string name)
+		{
+			return await _unitOfWork.PostsRepository.GetPostsByTag(name);
+		}
+
 		public async Task<Posts> GetPostsDetails(Guid id)
 		{
 			return await _unitOfWork.PostsRepository.GetById(id);

@@ -37,9 +37,9 @@ namespace FA.JustBlog.Core.Repository
 			return _DbContext.Posts.Count(it => it.Categories.Name.Equals(category));
 		}
 
-		public IList<Posts> GetPostsByCategory(string category)
+		public async Task<IList<Posts>> GetPostsByCategory(string category)
 		{
-			return _DbContext.Posts.Where(it => it.Categories.Name.Equals(category)).ToList();
+			return await _DbContext.Posts.Where(it => it.Categories.Name.Equals(category)).ToListAsync();
 		}
 
 		public int CountPostsByTag(string tag)

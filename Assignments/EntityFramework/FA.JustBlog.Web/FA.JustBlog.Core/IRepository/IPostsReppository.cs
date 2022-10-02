@@ -11,7 +11,7 @@ namespace FA.JustBlog.Core.IRepository
 		Task<IList<Posts>> GetMostViewedPosts(int size);
 		Task<IList<Posts>> GetPostsByMonth(DateTime monthYear);
 		int CountPostsByCategory(string category);
-		IList<Posts> GetPostsByCategory(string category);
+		Task<IList<Posts>> GetPostsByCategory(string category);
 		int CountPostsByTag(string tag);
 		Task<IList<Posts>> GetPostsByTag(string tag);
 		Task<Posts> FindPost(int year, int month, string urlSlug);

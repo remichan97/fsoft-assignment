@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<FA.JustBlog.Core.Models.Posts>
 @{
-    ViewData["Title"] = "All posts";
+    ViewData["Title"] = $"Post tagged with {TempData["tagName"]}";
 }
 
-<h2 class="post-title">All posts!</h2>
+<h2 class="post-title">Post tagged with @TempData["tagName"]</h2>
 <hr class="my-4" />
 
 @foreach (var item in Model)
