@@ -43,8 +43,20 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+	name: "Post",
+	pattern: "{controller=Post}/{year}/{month}/{title}",
+	defaults: new
+	{
+		controller = "Post",
+		action = "Details",
+		year = @"\d{4}",
+		month = @"\d{2}",
+	}
+	);
+app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapRazorPages();
 
 app.Run();

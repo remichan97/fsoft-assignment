@@ -1,0 +1,45 @@
+﻿<div class="row">
+    <div class="col-lg-6">
+        <h2 class="post-title">LatestPosts</h2>
+        <hr class="my-4" />
+
+        @foreach (var item in await unitOfWork.PostsRepository.GetLatestPosts(5))
+        {
+            <!-- Post preview-->
+            <div class="post-preview">
+                <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Id">
+                    <h2 class="post-title">@item.Title</h2>
+                    <h3 class="post-subtitle">@item.ShortDescription</h3>
+                </a>
+                <p class="post-meta">
+                    Posted
+                    on @item.PostedOn
+                </p>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+        }
+    </div>
+
+    <div class="col-lg-6">
+        <h2 class="post-title">Most Viewed Posts</h2>
+        <hr class="my-4" />
+
+        @foreach (var item in await unitOfWork.PostsRepository.GetMostViewedPosts(5))
+        {
+            <!-- Post preview-->
+            <div class="post-preview">
+                <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Id">
+                    <h2 class="post-title">@item.Title</h2>
+                    <h3 class="post-subtitle">@item.ShortDescription</h3>
+                </a>
+                <p class="post-meta">
+                    Posted
+                    on @item.PostedOn
+                </p>
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+        }
+    </div>
+</div>

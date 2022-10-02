@@ -60,5 +60,10 @@ namespace FA.JustBlog.Core.Repository
 		{
 			return await _DbContext.Posts.FirstOrDefaultAsync(it => it.PostedOn.Year == year && it.PostedOn.Month == month && it.UrlSlug.Equals(urlSlug));
 		}
+
+		public async Task<IList<Posts>> GetMostViewedPosts(int size)
+		{
+			return await _DbContext.Posts.OrderByDescending(it => it.ViewCount).Take(size).ToListAsync();
+		}
 	}
 }

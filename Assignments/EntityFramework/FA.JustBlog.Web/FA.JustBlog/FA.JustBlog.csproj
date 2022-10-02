@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FA.JustBlog.Services\FA.JustBlog.Services.csproj" />
+    <ProjectReference Include="..\FA.JustBlog.ViewModels\FA.JustBlog.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

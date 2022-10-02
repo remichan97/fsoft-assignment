@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FA.JustBlog.Core\FA.JustBlog.Core.csproj" />
+  </ItemGroup>
+
 </Project>

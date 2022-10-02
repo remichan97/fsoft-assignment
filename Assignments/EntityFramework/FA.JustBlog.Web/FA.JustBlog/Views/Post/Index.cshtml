@@ -10,7 +10,7 @@
 {
     <!-- Post preview-->
     <div class="post-preview">
-        <a href="post.html">
+        <a asp-controller="Post" asp-action="Details" asp-route-year="@item.PostedOn.Year" asp-route-month="@item.PostedOn.Month" asp-route-title="@item.UrlSlug">
             <h2 class="post-title">@item.Title</h2>
             <h3 class="post-subtitle">@item.ShortDescription</h3>
         </a>

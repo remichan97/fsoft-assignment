@@ -1,4 +1,5 @@
 ﻿using FA.JustBlog.Services.Post;
+using FA.JustBlog.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FA.JustBlog.Controllers
@@ -15,6 +16,12 @@ namespace FA.JustBlog.Controllers
 		public async Task<IActionResult> Index()
 		{
 			var model = await _postService.GetAllPosts();
+			return View(model);
+		}
+
+		public async Task<IActionResult> Details(int year, int month, string title)
+		{
+			var model = await _postService.GetPostsDetails(year, month, title);
 			return View(model);
 		}
 	}
