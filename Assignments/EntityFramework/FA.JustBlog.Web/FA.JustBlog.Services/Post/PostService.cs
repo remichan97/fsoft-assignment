@@ -17,9 +17,15 @@ namespace FA.JustBlog.Services.Post
 			this._unitOfWork = unitOfWork;
 		}
 
-		public IEnumerable<Posts> GetAllPosts()
+		public async Task<IEnumerable<Posts>> GetAllPosts()
 		{
-			return _unitOfWork.PostsRepository.GetAll();
+			return await _unitOfWork.PostsRepository.GetPublishedPosts();
+		}
+
+		public async Task<IEnumerable<Posts>> GetLatestPosts(int size)
+		{
+			return await _unitOfWork.PostsRepository.GetLatestPosts(size);
+
 		}
 	}
 }

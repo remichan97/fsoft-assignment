@@ -1,9 +1,43 @@
 ﻿@model IEnumerable<FA.JustBlog.Core.Models.Posts>
+@{
+    ViewData["Title"] = "All posts";
+}
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<h2 class="post-title">All posts!</h2>
+<hr class="my-4" />
+
+@foreach (var item in Model)
+{
+    <!-- Post preview-->
+    <div class="post-preview">
+        <a href="post.html">
+            <h2 class="post-title">@item.Title</h2>
+            <h3 class="post-subtitle">@item.ShortDescription</h3>
+        </a>
+        <p class="post-meta">
+            Posted
+            on @item.PostedOn
+        </p>
+    </div>
+    <!-- Divider-->
+    <hr class="my-4" />
+}
+
+@*<div class="post-preview">
+    <a href="post.html">
+        <h2 class="post-title">Failure is not an option</h2>
+        <h3 class="post-subtitle">Many say exploration is part of our destiny, but it’s actually our duty to future generations.</h3>
+    </a>
+    <p class="post-meta">
+        Posted by
+        <a href="#!">Start Bootstrap</a>
+        on July 8, 2022
+    </p>
+</div>
+<!-- Divider-->
+<hr class="my-4" />*@
+
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -39,7 +73,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.PostContent)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -78,12 +111,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PostContent)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
         </tr>
 }
     </tbody>
-</table>
+</table>*@

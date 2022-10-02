@@ -12,9 +12,9 @@ namespace FA.JustBlog.Controllers
 			this._postService = postService;
 		}
 
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
-			var model = _postService.GetAllPosts();
+			var model = await _postService.GetAllPosts();
 			return View(model);
 		}
 	}

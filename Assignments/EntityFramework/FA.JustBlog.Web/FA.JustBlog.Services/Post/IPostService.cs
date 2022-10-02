@@ -9,6 +9,7 @@ namespace FA.JustBlog.Services.Post
 {
 	public interface IPostService
 	{
-		IEnumerable<Posts> GetAllPosts();
+		Task<IEnumerable<Posts>> GetAllPosts();
+		Task<IEnumerable<Posts>> GetLatestPosts(int size);
 	}
 }

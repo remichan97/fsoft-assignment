@@ -1,4 +1,5 @@
 ﻿using FA.JustBlog.Models;
+using FA.JustBlog.Services.Post;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +8,18 @@ namespace FA.JustBlog.Controllers
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
+		private readonly IPostService _postService;
 
-		public HomeController(ILogger<HomeController> logger)
+		public HomeController(ILogger<HomeController> logger, IPostService postService)
 		{
 			_logger = logger;
+			this._postService = postService;
 		}
 
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
-			return View();
+			var model = await _postService.GetAllPosts();
+			return View(model);
 		}
 
 		public IActionResult Privacy()
