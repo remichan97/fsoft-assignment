@@ -2,5 +2,9 @@
   "version": "1.0",
   "defaultProvider": "cdnjs",
   "libraries": [
+    {
+      "library": "ckeditor5@35.1.0",
+      "destination": "wwwroot/lib/ckeditor5/"
+    }
   ]
 }
