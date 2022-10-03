@@ -24,7 +24,7 @@ namespace FA.JustBlog.Core.Repository
 
 		public async Task<IList<Posts>> GetLatestPosts(int size)
 		{
-			return await _DbContext.Posts.OrderByDescending(it => it.PostedOn).Take(size).ToListAsync();
+			return await _DbContext.Posts.OrderByDescending(it => it.PostedOn).Where(it => it.Published == true).Take(size).ToListAsync();
 		}
 
 		public async Task<IList<Posts>> GetPostsByMonth(DateTime monthYear)
@@ -39,7 +39,7 @@ namespace FA.JustBlog.Core.Repository
 
 		public async Task<IList<Posts>> GetPostsByCategory(string category)
 		{
-			return await _DbContext.Posts.Where(it => it.Categories.Name.Equals(category)).ToListAsync();
+			return await _DbContext.Posts.Where(it => it.Categories.Name.Equals(category) && it.Published == true).ToListAsync();
 		}
 
 		public int CountPostsByTag(string tag)
@@ -63,7 +63,7 @@ namespace FA.JustBlog.Core.Repository
 
 		public async Task<IList<Posts>> GetMostViewedPosts(int size)
 		{
-			return await _DbContext.Posts.OrderByDescending(it => it.ViewCount).Take(size).ToListAsync();
+			return await _DbContext.Posts.OrderByDescending(it => it.ViewCount).Where(it => it.Published == true).Take(size).ToListAsync();
 		}
 	}
 }

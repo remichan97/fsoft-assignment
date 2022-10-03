@@ -1,6 +1,6 @@
 ﻿<div class="row">
     <div class="col-lg-6">
-        <h2 class="post-title">LatestPosts</h2>
+        <h2 class="post-title">Latest Posts</h2>
         <hr class="my-4" />
 
         @foreach (var item in await unitOfWork.PostsRepository.GetLatestPosts(5))
