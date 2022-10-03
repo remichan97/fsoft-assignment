@@ -1,0 +1,12 @@
+﻿<div class="container">
+    <h2 class="post-title">Popular tags</h2>
+    <div class="row text-right">
+        @foreach (var item in unitOfWork.TagsRepository.GetAll())
+        {
+            <div class="col-1">
+                <span class="badge bg-info"><a asp-controller="Tag" asp-action="Index" asp-route-name="@item.Name">@item.Name</a></span>
+            </div>
+        }
+    </div>
+
+</div>

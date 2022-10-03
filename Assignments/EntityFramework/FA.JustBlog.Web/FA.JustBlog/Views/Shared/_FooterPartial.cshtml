@@ -1,6 +1,4 @@
-﻿<div class="row">
-	<div class="col-lg-6">
-        <footer class="border-top">
+﻿        <footer class="border-top">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
@@ -35,17 +33,3 @@
             </div>
         </footer>
         <div class="small text-center text-muted fst-italic">Copyright &copy; Just Blog 2022</div>
-	</div>
-    <div class="col-lg-6">
-        <h2 class="post-title">Popular tags</h2>
-        <hr class="my-4" />
-        <div class="row">
-            @foreach (var item in unitOfWork.TagsRepository.GetAll())
-            {
-                <div class="col-sm-2">
-                    <span class="badge bg-info"><a asp-controller="Tag" asp-action="Index" asp-route-name="@item.Name">@item.Name</a></span>
-                </div>
-            }
-        </div>
-    </div>
-</div>
