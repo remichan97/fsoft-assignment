@@ -5,6 +5,10 @@
     {
       "library": "ckeditor5@35.1.0",
       "destination": "wwwroot/lib/ckeditor5/"
+    },
+    {
+      "library": "sweetalert@2.1.2",
+      "destination": "wwwroot/lib/sweetalert/"
     }
   ]
 }

@@ -22,9 +22,4 @@
     <ProjectReference Include="..\FA.JustBlog.ViewModels\FA.JustBlog.ViewModels.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Areas\Admin\Models\" />
-  </ItemGroup>
-
 </Project>
