@@ -1,10 +1,5 @@
 ﻿using FA.JustBlog.Core.Infrastructure;
 using FA.JustBlog.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FA.JustBlog.Services.Post
 {
@@ -25,7 +20,6 @@ namespace FA.JustBlog.Services.Post
 		public async Task<IEnumerable<Posts>> GetLatestPosts(int size)
 		{
 			return await _unitOfWork.PostsRepository.GetLatestPosts(size);
-
 		}
 
 		public async Task<IEnumerable<Posts>> GetMostViewedPosts(int size)

@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FA.JustBlog.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -132,15 +128,18 @@ namespace FA.JustBlog.Core.Data
 			);
 
 			modelBuilder.Entity<PostTag>().HasData(
-				new PostTag {
+				new PostTag
+				{
 					PostId = Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aede"),
 					TagId = Guid.Parse("80fa9998-ca7b-4971-bce1-15f0688034c0")
 				},
-				new PostTag {
+				new PostTag
+				{
 					PostId = Guid.Parse("18d6c8da-6d80-4b5c-a94f-66e32835aede"),
 					TagId = Guid.Parse("b32db558-8e83-47f7-94dd-b27678cf98ba")
 				},
-				new PostTag {
+				new PostTag
+				{
 					PostId = Guid.Parse("8c61ae9e-6ea9-4bfe-bc59-9e75293c3026"),
 					TagId = Guid.Parse("80fa9998-ca7b-4971-bce1-15f0688034c0")
 				}

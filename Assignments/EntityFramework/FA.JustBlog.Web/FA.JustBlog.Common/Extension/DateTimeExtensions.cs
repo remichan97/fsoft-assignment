@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FA.JustBlog.Common.Extension
+﻿namespace FA.JustBlog.Common.Extension
 {
-    public static class DateTimeExtensions
-    {
+	public static class DateTimeExtensions
+	{
 		public static string GetPrettyDate(this DateTime d)
 		{
 			// 1.

@@ -17,7 +17,7 @@ namespace FA.JustBlog.Core.Infrastructure
 		{
 			this._context = context;
 		}
-		
+
 		public AppDbContext AppDbContext => _context;
 
 		public ICategoriesRepository CategoriesRepository => _categoriesRepository ?? (_categoriesRepository = new CategoriesRepository(_context));

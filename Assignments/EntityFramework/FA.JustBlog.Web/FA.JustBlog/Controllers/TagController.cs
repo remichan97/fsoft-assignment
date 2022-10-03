@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FA.JustBlog.Controllers
 {
-    public class TagController : Controller
-    {
+	public class TagController : Controller
+	{
 		private readonly IPostService _postService;
 
 		public TagController(IPostService postService)

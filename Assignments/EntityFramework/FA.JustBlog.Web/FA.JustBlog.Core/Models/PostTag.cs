@@ -6,9 +6,12 @@ namespace FA.JustBlog.Core.Models
 	{
 		[ForeignKey("Posts")]
 		public Guid PostId { get; set; }
+
 		public virtual Posts Posts { get; set; }
+
 		[ForeignKey("Tags")]
 		public Guid TagId { get; set; }
+
 		public virtual Tags Tags { get; set; }
 	}
 }

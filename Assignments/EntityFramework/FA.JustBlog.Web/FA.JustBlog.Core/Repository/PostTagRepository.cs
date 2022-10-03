@@ -10,6 +10,5 @@ namespace FA.JustBlog.Core.Repository
 		public PostTagRepository(AppDbContext context) : base(context)
 		{
 		}
-
 	}
 }

@@ -5,6 +5,5 @@ namespace FA.JustBlog.Core.IRepository
 {
 	public interface ICategoriesRepository : IBaseRepository<Categories>
 	{
-
 	}
 }

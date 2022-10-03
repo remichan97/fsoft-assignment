@@ -15,12 +15,10 @@ namespace FA.JustBlog.Core.Data
 			// Posts = Set<Posts>();
 			// Tags = Set<Tags>();
 			// PostTags = Set<PostTag>();
-
 		}
 
 		public AppDbContext(DbContextOptions<AppDbContext> option) : base(option)
 		{
-
 		}
 
 		public DbSet<Categories> Categories { get; set; }

@@ -11,6 +11,7 @@ namespace FA.JustBlog.Core.Infrastructure
 		public ICommentsRepository CommentsRepository { get; }
 		public ITagsRepository TagsRepository { get; }
 		public AppDbContext AppDbContext { get; }
+
 		Task<int> SaveChanges();
 	}
 }

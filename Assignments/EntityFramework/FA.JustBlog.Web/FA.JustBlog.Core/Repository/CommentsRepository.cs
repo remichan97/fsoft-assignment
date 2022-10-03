@@ -33,6 +33,5 @@ namespace FA.JustBlog.Core.Repository
 		{
 			return _DbContext.Comments.Where(it => it.Posts.Id.Equals(posts.Id)).ToList();
 		}
-
 	}
 }

@@ -10,6 +10,5 @@ namespace FA.JustBlog.Core.Repository
 		public CategoriesRepository(AppDbContext context) : base(context)
 		{
 		}
-
 	}
 }
