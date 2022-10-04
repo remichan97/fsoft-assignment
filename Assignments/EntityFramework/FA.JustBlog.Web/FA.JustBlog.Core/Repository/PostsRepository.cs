@@ -14,17 +14,17 @@ namespace FA.JustBlog.Core.Repository
 
 		public async Task<IList<Posts>> GetPublishedPosts()
 		{
-			return await _DbContext.Posts.Where(it => it.Published == true).ToListAsync();
+			return await _DbContext.Posts.Include(it => it.Categories).Where(it => it.Published == true).ToListAsync();
 		}
 
 		public async Task<IList<Posts>> GetUnpublishedPosts()
 		{
-			return await _DbContext.Posts.Where(it => it.Published == false).ToListAsync();
+			return await _DbContext.Posts.Include(it => it.Categories).Where(it => it.Published == false).ToListAsync();
 		}
 
 		public async Task<IList<Posts>> GetLatestPosts(int size)
 		{
-			return await _DbContext.Posts.OrderByDescending(it => it.PostedOn).Where(it => it.Published == true).Take(size).ToListAsync();
+			return await _DbContext.Posts.Include(it=> it.Categories).OrderByDescending(it => it.PostedOn).Where(it => it.Published == true).Take(size).ToListAsync();
 		}
 
 		public async Task<IList<Posts>> GetPostsByMonth(DateTime monthYear)
@@ -64,6 +64,11 @@ namespace FA.JustBlog.Core.Repository
 		public async Task<IList<Posts>> GetMostViewedPosts(int size)
 		{
 			return await _DbContext.Posts.OrderByDescending(it => it.ViewCount).Where(it => it.Published == true).Take(size).ToListAsync();
+		}
+
+		public async Task<IList<Posts>> GetAllPosts()
+		{
+			return await _DbContext.Posts.Include(it => it.Categories).ToListAsync();
 		}
 	}
 }

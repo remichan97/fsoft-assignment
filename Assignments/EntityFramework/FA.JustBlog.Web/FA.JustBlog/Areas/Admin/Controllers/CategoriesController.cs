@@ -1,11 +1,13 @@
 ﻿using FA.JustBlog.Core.Data;
 using FA.JustBlog.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FA.JustBlog.Areas.Admin.Controllers
 {
 	[Area("Admin")]
+	[Authorize]
 	public class CategoriesController : Controller
 	{
 		private readonly AppDbContext _context;

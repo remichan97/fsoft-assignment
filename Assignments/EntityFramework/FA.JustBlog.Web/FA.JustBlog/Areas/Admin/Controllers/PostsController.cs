@@ -1,5 +1,6 @@
 ﻿using FA.JustBlog.Core.Data;
 using FA.JustBlog.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace FA.JustBlog.Areas.Admin.Controllers
 {
 	[Area("Admin")]
+	[Authorize]
 	public class PostsController : Controller
 	{
 		private readonly AppDbContext _context;
@@ -21,25 +23,6 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		{
 			var appDbContext = _context.Posts.Include(p => p.Categories);
 			return View(await appDbContext.ToListAsync());
-		}
-
-		// GET: Admin/Posts/Details/5
-		public async Task<IActionResult> Details(Guid? id)
-		{
-			if (id == null || _context.Posts == null)
-			{
-				return NotFound();
-			}
-
-			var posts = await _context.Posts
-				.Include(p => p.Categories)
-				.FirstOrDefaultAsync(m => m.Id == id);
-			if (posts == null)
-			{
-				return NotFound();
-			}
-
-			return View(posts);
 		}
 
 		// GET: Admin/Posts/Create

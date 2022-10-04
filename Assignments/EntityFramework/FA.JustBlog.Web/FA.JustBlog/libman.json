@@ -1,14 +1,18 @@
 {
-	"version": "1.0",
-	"defaultProvider": "cdnjs",
-	"libraries": [
-		{
-			"library": "ckeditor5@35.1.0",
-			"destination": "wwwroot/lib/ckeditor5/"
-		},
-		{
-			"library": "sweetalert@2.1.2",
-			"destination": "wwwroot/lib/sweetalert/"
-		}
-	]
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "ckeditor5@35.1.0",
+      "destination": "wwwroot/lib/ckeditor5/"
+    },
+    {
+      "library": "sweetalert@2.1.2",
+      "destination": "wwwroot/lib/sweetalert/"
+    },
+    {
+      "library": "font-awesome@6.2.0",
+      "destination": "wwwroot/lib/font-awesome/"
+    }
+  ]
 }

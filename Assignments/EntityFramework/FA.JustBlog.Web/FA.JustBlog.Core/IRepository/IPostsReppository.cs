@@ -5,6 +5,8 @@ namespace FA.JustBlog.Core.IRepository
 {
 	public interface IPostsRepository : IBaseRepository<Posts>
 	{
+		Task<IList<Posts>> GetAllPosts();
+
 		Task<IList<Posts>> GetPublishedPosts();
 
 		Task<IList<Posts>> GetUnpublishedPosts();
