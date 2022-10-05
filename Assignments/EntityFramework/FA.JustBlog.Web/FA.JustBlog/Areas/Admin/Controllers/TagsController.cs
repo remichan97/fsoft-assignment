@@ -1,5 +1,7 @@
 ﻿using FA.JustBlog.Core.Data;
 using FA.JustBlog.Core.Models;
+using FA.JustBlog.Services.Tag;
+using FA.JustBlog.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,37 +12,18 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 	[Authorize]
 	public class TagsController : Controller
 	{
-		private readonly AppDbContext _context;
+		private readonly ITagService _tagService;
 
-		public TagsController(AppDbContext context)
+		public TagsController(ITagService tagService)
 		{
-			_context = context;
+			this._tagService = tagService;
 		}
 
 		// GET: Admin/Tags
 		public async Task<IActionResult> Index()
 		{
-			return View(await _context.Tags.ToListAsync());
+			return View(await _tagService.GetAllTags());
 		}
-
-		// GET: Admin/Tags/Details/5
-		public async Task<IActionResult> Details(Guid? id)
-		{
-			if (id == null || _context.Tags == null)
-			{
-				return NotFound();
-			}
-
-			var tags = await _context.Tags
-				.FirstOrDefaultAsync(m => m.Id == id);
-			if (tags == null)
-			{
-				return NotFound();
-			}
-
-			return View(tags);
-		}
-
 		// GET: Admin/Tags/Create
 		public IActionResult Create()
 		{
@@ -52,14 +35,19 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("Id,Name,UrlSlug,Description,Count")] Tags tags)
+		public async Task<IActionResult> Create([Bind("Id,Name,Description")] TagCreateVM tags)
 		{
 			if (ModelState.IsValid)
 			{
-				tags.Id = Guid.NewGuid();
-				_context.Add(tags);
-				await _context.SaveChangesAsync();
-				return RedirectToAction(nameof(Index));
+				try
+				{
+					await _tagService.AddTag(tags);
+					return RedirectToAction(nameof(Index));
+				}
+				catch (InvalidOperationException ex)
+				{
+					ModelState.AddModelError(string.Empty, ex.Message);
+				}
 			}
 			return View(tags);
 		}
@@ -67,17 +55,20 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		// GET: Admin/Tags/Edit/5
 		public async Task<IActionResult> Edit(Guid? id)
 		{
-			if (id == null || _context.Tags == null)
+			if (id == null)
 			{
 				return NotFound();
 			}
 
-			var tags = await _context.Tags.FindAsync(id);
+			var tags = await _tagService.CheckExists(id.Value);
 			if (tags == null)
 			{
 				return NotFound();
 			}
-			return View(tags);
+
+			var data = new TagCreateVM { Name = tags.Name, Description = tags.Description };
+			TempData["TagId"] = id;
+			return View(data);
 		}
 
 		// POST: Admin/Tags/Edit/5
@@ -85,46 +76,33 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,UrlSlug,Description,Count")] Tags tags)
+		public async Task<IActionResult> Edit(Guid id, [Bind("Name,Description")] TagCreateVM tags)
 		{
-			if (id != tags.Id)
-			{
-				return NotFound();
-			}
-
 			if (ModelState.IsValid)
 			{
 				try
 				{
-					_context.Update(tags);
-					await _context.SaveChangesAsync();
+					await _tagService.EditTag(tags, id);
+					return RedirectToAction(nameof(Index));
 				}
-				catch (DbUpdateConcurrencyException)
+				catch (InvalidOperationException ex)
 				{
-					if (!TagsExists(tags.Id))
-					{
-						return NotFound();
-					}
-					else
-					{
-						throw;
-					}
+					ModelState.AddModelError(string.Empty, ex.Message);
 				}
-				return RedirectToAction(nameof(Index));
 			}
+			TempData["TagId"] = id;
 			return View(tags);
 		}
 
 		// GET: Admin/Tags/Delete/5
 		public async Task<IActionResult> Delete(Guid? id)
 		{
-			if (id == null || _context.Tags == null)
+			if (id == null)
 			{
 				return NotFound();
 			}
 
-			var tags = await _context.Tags
-				.FirstOrDefaultAsync(m => m.Id == id);
+			var tags = await _tagService.CheckExists(id.Value);
 			if (tags == null)
 			{
 				return NotFound();
@@ -138,23 +116,15 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> DeleteConfirmed(Guid id)
 		{
-			if (_context.Tags == null)
-			{
-				return Problem("Entity set 'AppDbContext.Tags'  is null.");
-			}
-			var tags = await _context.Tags.FindAsync(id);
+			var tags = await _tagService.CheckExists(id);
+
 			if (tags != null)
 			{
-				_context.Tags.Remove(tags);
+				await _tagService.DeleteTag(id);
 			}
 
-			await _context.SaveChangesAsync();
 			return RedirectToAction(nameof(Index));
 		}
 
-		private bool TagsExists(Guid id)
-		{
-			return _context.Tags.Any(e => e.Id == id);
-		}
 	}
 }

@@ -13,8 +13,11 @@ namespace FA.JustBlog.Services.Tag
 	{
 		Task<IEnumerable<Tags>> GetAllTags();
 		Task<IEnumerable<SelectListItem>> GetSelectListItems();
-		Task AddTag(Tags tag);
-		Task EditTag(Tags tag);
+		Task AddTag(TagCreateVM tag);
+		Task EditTag(TagCreateVM tag, Guid id);
 		Task DeleteTag(Guid tagId);
+		Task<Tags> CheckExists(string name);
+		Task<Tags> CheckExists(Guid id);
+
 	}
 }

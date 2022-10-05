@@ -1,13 +1,12 @@
-﻿@model FA.JustBlog.Core.Models.Tags
+﻿@model FA.JustBlog.ViewModels.TagCreateVM
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create a new Tag";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>New Tag</h1>
 
-<h4>Tags</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,29 +18,16 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UrlSlug" class="control-label"></label>
-                <input asp-for="UrlSlug" class="form-control" />
-                <span asp-validation-for="UrlSlug" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Count" class="control-label"></label>
-                <input asp-for="Count" class="form-control" />
-                <span asp-validation-for="Count" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
+                <a class="btn btn-dark" asp-action="Index">Back to List</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -9,10 +9,6 @@ namespace FA.JustBlog.ViewModels
 		public string Name { get; set; }
 
 		[Required]
-		[StringLength(255)]
-		public string UrlSlug { get; set; }
-
-		[Required]
 		[StringLength(5000)]
 		public string Description { get; set; }
 	}

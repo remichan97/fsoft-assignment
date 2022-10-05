@@ -3,6 +3,7 @@ using FA.JustBlog.Core.Infrastructure;
 using FA.JustBlog.Core.IRepository;
 using FA.JustBlog.Core.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace FA.JustBlog.Core.Repository
 {
@@ -12,9 +13,15 @@ namespace FA.JustBlog.Core.Repository
 		{
 		}
 
+		public async Task<Tags> CheckExists(string name)
+		{
+			return await _DbContext.Tags.FirstOrDefaultAsync(it => it.Name.Equals(name));
+		}
+
 		public async Task<Tags> CheckExists(Guid id)
 		{
 			return await _DbContext.Tags.FirstOrDefaultAsync(it => it.Id.Equals(id));
+
 		}
 
 		public async Task<IList<Tags>> GetAllTags()
