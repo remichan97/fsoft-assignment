@@ -70,5 +70,10 @@ namespace FA.JustBlog.Core.Repository
 		{
 			return await _DbContext.Posts.Include(it => it.Categories).ToListAsync();
 		}
+
+		public async Task<Posts> FindPost(Guid id)
+		{
+			return await _DbContext.Posts.Include(it => it.Categories).FirstOrDefaultAsync(it => it.Id.Equals(id));
+		}
 	}
 }

@@ -21,8 +21,10 @@ namespace FA.JustBlog.Services.Post
 
 		Task AddPost(PostCreateVM post);
 
-		Task EditPost(PostCreateVM post);
+		Task EditPost(PostCreateVM post, Guid id);
 
 		Task DeletePost(Guid postId);
+
+		Task<Posts> FindPostById(Guid id);
 	}
 }

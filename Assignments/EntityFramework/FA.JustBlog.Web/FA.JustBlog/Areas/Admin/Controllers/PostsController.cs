@@ -1,5 +1,9 @@
 ﻿using FA.JustBlog.Core.Data;
 using FA.JustBlog.Core.Models;
+using FA.JustBlog.Services.Category;
+using FA.JustBlog.Services.Post;
+using FA.JustBlog.Services.Tag;
+using FA.JustBlog.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,24 +15,29 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 	[Authorize]
 	public class PostsController : Controller
 	{
-		private readonly AppDbContext _context;
+		private readonly IPostService _postService;
+		private readonly ITagService _tagService;
+		private readonly ICategoryService _categoryService;
 
-		public PostsController(AppDbContext context)
+		public PostsController(IPostService postService, ITagService tagService, ICategoryService categoryService)
 		{
-			_context = context;
+			this._postService = postService;
+			this._tagService = tagService;
+			this._categoryService = categoryService;
 		}
 
 		// GET: Admin/Posts
 		public async Task<IActionResult> Index()
 		{
-			var appDbContext = _context.Posts.Include(p => p.Categories);
-			return View(await appDbContext.ToListAsync());
+			var model = await _postService.GetAllPosts();
+			return View(model);
 		}
 
 		// GET: Admin/Posts/Create
-		public IActionResult Create()
+		public async Task<IActionResult> CreateAsync()
 		{
-			ViewData["CategoriesId"] = new SelectList(_context.Categories, "Id", "Description");
+			ViewData["CategoriesId"] = await _categoryService.GetSelectListItems();
+			ViewData["TagsId"] = await _tagService.GetSelectListItems();
 			return View();
 		}
 
@@ -37,34 +46,50 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Create([Bind("Id,Title,ShortDescription,Meta,UrlSlug,Published,PostedOn,CategoriesId,ViewCount,RateCount,TotalRate,PostContent")] Posts posts)
+		public async Task<IActionResult> Create([Bind("Title,ShortDescription,Meta,Published,CategoriesId,PostContent,TagId")] PostCreateVM posts)
 		{
 			if (ModelState.IsValid)
 			{
-				posts.Id = Guid.NewGuid();
-				_context.Add(posts);
-				await _context.SaveChangesAsync();
+				await _postService.AddPost(posts);
 				return RedirectToAction(nameof(Index));
 			}
-			ViewData["CategoriesId"] = new SelectList(_context.Categories, "Id", "Description", posts.CategoriesId);
+			ViewData["CategoriesId"] = await _categoryService.GetSelectListItems();
+			ViewData["TagsId"] = await _tagService.GetSelectListItems();
 			return View(posts);
 		}
 
 		// GET: Admin/Posts/Edit/5
 		public async Task<IActionResult> Edit(Guid? id)
 		{
-			if (id == null || _context.Posts == null)
+			if (id == null)
 			{
 				return NotFound();
 			}
 
-			var posts = await _context.Posts.FindAsync(id);
+			var posts = await _postService.FindPostById(id.Value);
 			if (posts == null)
 			{
 				return NotFound();
 			}
-			ViewData["CategoriesId"] = new SelectList(_context.Categories, "Id", "Description", posts.CategoriesId);
-			return View(posts);
+
+			var model = new PostCreateVM();
+
+			model.Title = posts.Title;
+			model.ShortDescription = posts.ShortDescription;
+			model.Meta = posts.Meta;
+			model.Published = posts.Published;
+			model.CategoriesId = posts.CategoriesId;
+			model.TagId = new List<Guid>();
+			foreach (var item in posts.PostTags)
+			{
+				model.TagId.Add(item.TagId);
+			}
+			model.PostContent = posts.PostContent;
+
+			ViewData["CategoriesId"] = await _categoryService.GetSelectListItems();
+			ViewData["TagsId"] = await _tagService.GetSelectListItems();
+			TempData["PostId"] = id;
+			return View(model);
 		}
 
 		// POST: Admin/Posts/Edit/5
@@ -72,48 +97,36 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(Guid id, [Bind("Id,Title,ShortDescription,Meta,UrlSlug,Published,PostedOn,CategoriesId,ViewCount,RateCount,TotalRate,PostContent")] Posts posts)
+		public async Task<IActionResult> Edit(Guid id, [Bind("Title,ShortDescription,Meta,Published,CategoriesId,PostContent,TagId")] PostCreateVM posts)
 		{
-			if (id != posts.Id)
-			{
-				return NotFound();
-			}
 
 			if (ModelState.IsValid)
 			{
 				try
 				{
-					_context.Update(posts);
-					await _context.SaveChangesAsync();
+					await _postService.EditPost(posts, id);
+					return RedirectToAction(nameof(Index));
 				}
 				catch (DbUpdateConcurrencyException)
 				{
-					if (!PostsExists(posts.Id))
-					{
-						return NotFound();
-					}
-					else
-					{
-						throw;
-					}
 				}
 				return RedirectToAction(nameof(Index));
 			}
-			ViewData["CategoriesId"] = new SelectList(_context.Categories, "Id", "Description", posts.CategoriesId);
+			ViewData["CategoriesId"] = await _categoryService.GetSelectListItems();
+			ViewData["TagsId"] = await _tagService.GetSelectListItems();
+			TempData["PostId"] = id;
 			return View(posts);
 		}
 
 		// GET: Admin/Posts/Delete/5
 		public async Task<IActionResult> Delete(Guid? id)
 		{
-			if (id == null || _context.Posts == null)
+			if (id == null)
 			{
 				return NotFound();
 			}
 
-			var posts = await _context.Posts
-				.Include(p => p.Categories)
-				.FirstOrDefaultAsync(m => m.Id == id);
+			var posts = await _postService.FindPostById(id.Value);
 			if (posts == null)
 			{
 				return NotFound();
@@ -127,23 +140,14 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> DeleteConfirmed(Guid id)
 		{
-			if (_context.Posts == null)
-			{
-				return Problem("Entity set 'AppDbContext.Posts'  is null.");
-			}
-			var posts = await _context.Posts.FindAsync(id);
+			var posts = await _postService.FindPostById(id);
+
 			if (posts != null)
 			{
-				_context.Posts.Remove(posts);
+				await _postService.DeletePost(id);
 			}
 
-			await _context.SaveChangesAsync();
 			return RedirectToAction(nameof(Index));
-		}
-
-		private bool PostsExists(Guid id)
-		{
-			return _context.Posts.Any(e => e.Id == id);
 		}
 	}
 }

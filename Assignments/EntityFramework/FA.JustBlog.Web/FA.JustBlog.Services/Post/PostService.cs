@@ -1,4 +1,5 @@
-﻿using FA.JustBlog.Core.Infrastructure;
+﻿using FA.JustBlog.Common;
+using FA.JustBlog.Core.Infrastructure;
 using FA.JustBlog.Core.Models;
 using FA.JustBlog.ViewModels;
 
@@ -13,19 +14,58 @@ namespace FA.JustBlog.Services.Post
 			this._unitOfWork = unitOfWork;
 		}
 
-		public Task AddPost(PostCreateVM post)
+		public async Task AddPost(PostCreateVM post)
 		{
-			throw new NotImplementedException();
+			var posts = new Posts
+			{
+				Id = Guid.NewGuid(),
+				Title = post.Title,
+				ShortDescription = post.ShortDescription,
+				Meta = post.Meta,
+				Published = post.Published,
+				UrlSlug = SeoUrlHepler.FrientlyUrl(post.Title),
+				CategoriesId = post.CategoriesId,
+				PostedOn = DateTime.Now,
+				PostTags = new List<PostTag>()
+			};
+			foreach (var item in post.TagId)
+			{
+				posts.PostTags.Add(new PostTag() { TagId = item });
+			}
+			posts.PostContent = post.PostContent;
+
+			await _unitOfWork.PostsRepository.Add(posts);
+			await _unitOfWork.SaveChanges();
+
 		}
 
-		public Task DeletePost(Guid postId)
+		public async Task DeletePost(Guid postId)
 		{
-			throw new NotImplementedException();
+			_unitOfWork.PostsRepository.Delete(postId);
+			await _unitOfWork.SaveChanges();
 		}
 
-		public Task EditPost(PostCreateVM post)
+		public async Task EditPost(PostCreateVM post, Guid id)
 		{
-			throw new NotImplementedException();
+			var data = await _unitOfWork.PostsRepository.GetById(id);
+
+			if (data is null)
+			{
+				throw new InvalidOperationException("The Post doesn't exists");
+			}
+
+			data.Title = post.Title;
+			data.Meta = post.Meta;
+			data.Published = post.Published;
+			data.CategoriesId = post.CategoriesId;
+
+			_unitOfWork.PostsRepository.Update(data);
+			await _unitOfWork.SaveChanges();
+		}
+
+		public async Task<Posts> FindPostById(Guid id)
+		{
+			return await _unitOfWork.PostsRepository.FindPost(id);
 		}
 
 		public async Task<IEnumerable<Posts>> GetAllPosts()

@@ -1,19 +1,18 @@
-﻿@model FA.JustBlog.Core.Models.Posts
+﻿@model FA.JustBlog.ViewModels.PostCreateVM
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Post";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1>Edit Post</h1>
 
-<h4>Posts</h4>
 <hr />
 <div class="row">
     <div class="col-md-12">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" value="@TempData["PostId"]" />
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
@@ -29,20 +28,10 @@
                 <input asp-for="Meta" class="form-control" />
                 <span asp-validation-for="Meta" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="UrlSlug" class="control-label"></label>
-                <input asp-for="UrlSlug" class="form-control" />
-                <span asp-validation-for="UrlSlug" class="text-danger"></span>
-            </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Published" /> @Html.DisplayNameFor(model => model.Published)
                 </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="PostedOn" class="control-label"></label>
-                <input asp-for="PostedOn" class="form-control" />
-                <span asp-validation-for="PostedOn" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CategoriesId" class="control-label"></label>
@@ -50,19 +39,8 @@
                 <span asp-validation-for="CategoriesId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ViewCount" class="control-label"></label>
-                <input asp-for="ViewCount" class="form-control" />
-                <span asp-validation-for="ViewCount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RateCount" class="control-label"></label>
-                <input asp-for="RateCount" class="form-control" />
-                <span asp-validation-for="RateCount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TotalRate" class="control-label"></label>
-                <input asp-for="TotalRate" class="form-control" />
-                <span asp-validation-for="TotalRate" class="text-danger"></span>
+                <label asp-for="TagId" class="control-label"></label>
+                <select multiple asp-for="TagId" class="form-select" asp-items="ViewBag.TagsId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="PostContent" class="control-label"></label>

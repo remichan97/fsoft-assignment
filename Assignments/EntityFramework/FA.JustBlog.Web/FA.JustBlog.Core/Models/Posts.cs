@@ -5,7 +5,7 @@ namespace FA.JustBlog.Core.Models
 {
 	public class Posts
 	{
-		public Guid Id { get; set; } = Guid.NewGuid();
+		public Guid Id { get; set; }
 
 		[Required(ErrorMessage = " Please enter a post title")]
 		[StringLength(255)]

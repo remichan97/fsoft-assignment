@@ -26,5 +26,7 @@ namespace FA.JustBlog.Core.IRepository
 		Task<IList<Posts>> GetPostsByTag(string tag);
 
 		Task<Posts> FindPost(int year, int month, string urlSlug);
+		Task<Posts> FindPost(Guid id);
+
 	}
 }

@@ -16,25 +16,25 @@ namespace FA.JustBlog.ViewModels
 
 		[Required]
 		[StringLength(255)]
+		[Display(Name = "Short Description")]
 		public string ShortDescription { get; set; }
 
 		[Required]
 		[StringLength(255)]
 		public string Meta { get; set; }
 
-		[Required]
-		[Display(Name = "SEO URL")]
-		public string UrlSlug { get; set; }
-
 		[Display(Name = "Publish the post?")]
 		public bool Published { get; set; }
 
 		[Required]
 		[Display(Name = "Category")]
-		public Guid CategoryId { get; set; }
+		public Guid CategoriesId { get; set; }
 
 		[Required]
 		[Display(Name = "Tags")]
 		public List<Guid> TagId { get; set; }
+		[Required]
+		[Display(Name = "Content")]
+		public string PostContent { get; set; }
 	}
 }
