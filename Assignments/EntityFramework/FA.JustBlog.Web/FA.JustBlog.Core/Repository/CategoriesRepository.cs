@@ -17,6 +17,11 @@ namespace FA.JustBlog.Core.Repository
 			return await _DbContext.Categories.FirstOrDefaultAsync(it => it.Id.Equals(id));
 		}
 
+		public async Task<Categories> CheckUrlSlugs(string urlSlug)
+		{
+			return await _DbContext.Categories.FirstOrDefaultAsync(it => it.UrlSlug.Equals(urlSlug));
+		}
+
 		public async Task<IList<Categories>> GetCategories()
 		{
 			return await _DbContext.Categories.ToListAsync();

@@ -12,6 +12,11 @@ namespace FA.JustBlog.Core.Repository
 		{
 		}
 
+		public async Task<Tags> CheckExists(Guid id)
+		{
+			return await _DbContext.Tags.FirstOrDefaultAsync(it => it.Id.Equals(id));
+		}
+
 		public async Task<IList<Tags>> GetAllTags()
 		{
 			return await _DbContext.Tags.ToListAsync();

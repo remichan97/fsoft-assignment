@@ -21,6 +21,10 @@ namespace FA.JustBlog.Services.Category
 
 		public async Task AddCategory(Categories category)
 		{
+			if(await CheckUrlSlugs(category.UrlSlug) is not null)
+			{
+				throw new InvalidOperationException("Url Slug is already being used for another category");
+			}
 			await _unitOfWork.CategoriesRepository.Add(category);
 			await _unitOfWork.SaveChanges();
 		}
@@ -33,6 +37,10 @@ namespace FA.JustBlog.Services.Category
 
 		public async Task EditCategory(Categories category)
 		{
+			if (await CheckUrlSlugs(category.UrlSlug) is not null)
+			{
+				throw new InvalidOperationException("Url Slug is already being used for another category");
+			}
 			_unitOfWork.CategoriesRepository.Update(category);
 			await _unitOfWork.SaveChanges();
 		}
@@ -50,6 +58,11 @@ namespace FA.JustBlog.Services.Category
 		public async Task<Categories> CheckExist(Guid id)
 		{
 			return await _unitOfWork.CategoriesRepository.CheckExists(id);
+		}
+
+		public async Task<Categories> CheckUrlSlugs(string url)
+		{
+			return await _unitOfWork.CategoriesRepository.CheckUrlSlugs(url);
 		}
 	}
 }

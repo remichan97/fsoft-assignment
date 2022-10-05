@@ -2,7 +2,7 @@
 
 namespace FA.JustBlog.ViewModels
 {
-	public class CategoryCreateVM
+	public class TagCreateVM
     {
 		[StringLength(255)]
 		[Required(ErrorMessage = "Please enter a name")]

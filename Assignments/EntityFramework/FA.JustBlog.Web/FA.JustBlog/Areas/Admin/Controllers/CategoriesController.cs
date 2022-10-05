@@ -80,16 +80,9 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 				{
 					await _categoryService.EditCategory(categories);
 				}
-				catch (DbUpdateConcurrencyException)
+				catch (InvalidOperationException ex)
 				{
-					//if (!CategoriesExists(categories.Id))
-					//{
-					//	return NotFound();
-					//}
-					//else
-					//{
-					//	throw;
-					//}
+					ModelState.AddModelError(string.Empty, ex.Message);
 				}
 				return RedirectToAction(nameof(Index));
 			}

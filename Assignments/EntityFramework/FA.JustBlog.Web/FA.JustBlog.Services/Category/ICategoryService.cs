@@ -15,6 +15,7 @@ namespace FA.JustBlog.Services.Category
 		Task<IEnumerable<Categories>> GetAllCategories();
 		Task<IEnumerable<SelectListItem>> GetSelectListItems();
 		Task<Categories> CheckExist(Guid id);
+		Task<Categories> CheckUrlSlugs(string url);
 		Task AddCategory(Categories category);
 		Task EditCategory(Categories category);
 		Task DeleteCategory(Guid categoryId);

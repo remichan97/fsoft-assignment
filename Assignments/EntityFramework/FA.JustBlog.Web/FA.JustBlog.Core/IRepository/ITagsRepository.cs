@@ -7,5 +7,6 @@ namespace FA.JustBlog.Core.IRepository
 	{
 		Task<IList<Tags>> GetAllTags();
 		Task<Tags> GetTagsByUrlSlugs(string urlSlugs);
+		Task<Tags> CheckExists(Guid id);
 	}
 }

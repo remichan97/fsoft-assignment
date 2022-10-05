@@ -21,6 +21,7 @@ namespace FA.JustBlog.Services.Tag
 
 		public async Task AddTag(Tags tag)
 		{
+
 			await _unitOfWork.TagsRepository.Add(tag);
 			await _unitOfWork.SaveChanges();
 		}
