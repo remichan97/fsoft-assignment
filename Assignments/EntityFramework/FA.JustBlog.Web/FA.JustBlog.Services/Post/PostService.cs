@@ -78,6 +78,11 @@ namespace FA.JustBlog.Services.Post
 			return await _unitOfWork.PostsRepository.GetLatestPosts(size);
 		}
 
+		public async Task<IEnumerable<Posts>> GetMostInterestingPosts(int size)
+		{
+			return await _unitOfWork.PostsRepository.GetMostInterestingPosts(size);
+		}
+
 		public async Task<IEnumerable<Posts>> GetMostViewedPosts(int size)
 		{
 			return await _unitOfWork.PostsRepository.GetMostViewedPosts(size);
@@ -106,6 +111,11 @@ namespace FA.JustBlog.Services.Post
 		public async Task<IEnumerable<Posts>> GetPublishedPosts()
 		{
 			return await _unitOfWork.PostsRepository.GetPublishedPosts();
+		}
+
+		public async Task<IEnumerable<Posts>> GetUnpublishedPosts()
+		{
+			return await _unitOfWork.PostsRepository.GetUnpublishedPosts();
 		}
 	}
 }

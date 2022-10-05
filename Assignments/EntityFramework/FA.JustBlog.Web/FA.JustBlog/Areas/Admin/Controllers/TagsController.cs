@@ -1,4 +1,5 @@
-﻿using FA.JustBlog.Core.Data;
+﻿using FA.JustBlog.Common.Constants;
+using FA.JustBlog.Core.Data;
 using FA.JustBlog.Core.Models;
 using FA.JustBlog.Services.Tag;
 using FA.JustBlog.ViewModels;
@@ -9,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace FA.JustBlog.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[Authorize]
+	[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 	public class TagsController : Controller
 	{
 		private readonly ITagService _tagService;
@@ -95,6 +96,7 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		}
 
 		// GET: Admin/Tags/Delete/5
+		[Authorize(Roles = Role.BlogOwner)]
 		public async Task<IActionResult> Delete(Guid? id)
 		{
 			if (id == null)
@@ -113,6 +115,7 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 
 		// POST: Admin/Tags/Delete/5
 		[HttpPost, ActionName("Delete")]
+		[Authorize(Roles = Role.BlogOwner)]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> DeleteConfirmed(Guid id)
 		{

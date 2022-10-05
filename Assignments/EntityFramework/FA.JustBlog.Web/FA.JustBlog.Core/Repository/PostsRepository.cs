@@ -75,5 +75,10 @@ namespace FA.JustBlog.Core.Repository
 		{
 			return await _DbContext.Posts.Include(it => it.Categories).FirstOrDefaultAsync(it => it.Id.Equals(id));
 		}
+
+		public async Task<IList<Posts>> GetMostInterestingPosts(int size)
+		{
+			return await _DbContext.Posts.Include(it => it.Categories).OrderByDescending(it => it.TotalRate).Take(size).ToListAsync();
+		}
 	}
 }

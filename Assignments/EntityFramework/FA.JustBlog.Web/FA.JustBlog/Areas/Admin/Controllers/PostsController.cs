@@ -1,18 +1,15 @@
-﻿using FA.JustBlog.Core.Data;
-using FA.JustBlog.Core.Models;
+﻿using FA.JustBlog.Common.Constants;
 using FA.JustBlog.Services.Category;
 using FA.JustBlog.Services.Post;
 using FA.JustBlog.Services.Tag;
 using FA.JustBlog.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace FA.JustBlog.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[Authorize]
+	[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 	public class PostsController : Controller
 	{
 		private readonly IPostService _postService;
@@ -30,6 +27,35 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		public async Task<IActionResult> Index()
 		{
 			var model = await _postService.GetAllPosts();
+			return View(model);
+		}
+		public async Task<IActionResult> Latest()
+		{
+			var model = await _postService.GetLatestPosts(5);
+			return View(model);
+		}
+
+		public async Task<IActionResult> MostViewed()
+		{
+			var model = await _postService.GetMostViewedPosts(5);
+			return View(model);
+		}
+
+		public async Task<IActionResult> Interesting()
+		{
+			var model = await _postService.GetMostInterestingPosts(5);
+			return View(model);
+		}
+
+		public async Task<IActionResult> Published()
+		{
+			var model = await _postService.GetPublishedPosts();
+			return View(model);
+		}
+
+		public async Task<IActionResult> Unpublished()
+		{
+			var model = await _postService.GetUnpublishedPosts();
 			return View(model);
 		}
 
@@ -107,8 +133,9 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 					await _postService.EditPost(posts, id);
 					return RedirectToAction(nameof(Index));
 				}
-				catch (DbUpdateConcurrencyException)
+				catch (InvalidOperationException ex)
 				{
+					ModelState.AddModelError(string.Empty, ex.Message);
 				}
 				return RedirectToAction(nameof(Index));
 			}
@@ -119,6 +146,7 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		}
 
 		// GET: Admin/Posts/Delete/5
+		[Authorize(Roles = Role.BlogOwner)]
 		public async Task<IActionResult> Delete(Guid? id)
 		{
 			if (id == null)
@@ -138,6 +166,7 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		// POST: Admin/Posts/Delete/5
 		[HttpPost, ActionName("Delete")]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Role.BlogOwner)]
 		public async Task<IActionResult> DeleteConfirmed(Guid id)
 		{
 			var posts = await _postService.FindPostById(id);

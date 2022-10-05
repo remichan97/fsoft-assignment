@@ -187,26 +187,26 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="Posts" asp-action="Latest">
                                 <span><i class="fa-solid fa-file-circle-plus"></i> Latest Posts</span>
                             </a>
                         </li>
                         <li class="sidebar-item"> 
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="Posts" asp-action="MostViewed">
                                 <span><i class="fa-solid fa-eye"></i> Most Viewed Posts</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="Posts" asp-action="Interesting">
                                 <span><i class="fa-solid fa-fire"></i> Most Interesting Posts</span>
                             </a>
                         </li><li class="sidebar-item"> 
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="Posts" asp-action="Published">
                                 <span><i class="fa-solid fa-square-check"></i> Published Posts</span>
                             </a>
                         </li>
                         <li class="sidebar-item"> 
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="Posts" asp-action="Unpublished">
                                 <span><i class="fa-solid fa-square-minus"></i> Unpublished Posts</span>
                             </a>
                         </li>
@@ -221,7 +221,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item"> 
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" asp-area="Admin" asp-controller="Comments" asp-action="Index">
                                 <span><i class="fa-solid fa-comments"></i> All Comments</span>
                             </a>
                         </li>
@@ -259,6 +259,7 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/ckeditor5/ckeditor.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/sweetalert/sweetalert.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>

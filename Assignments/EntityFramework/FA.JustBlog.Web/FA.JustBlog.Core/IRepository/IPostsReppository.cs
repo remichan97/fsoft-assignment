@@ -8,12 +8,13 @@ namespace FA.JustBlog.Core.IRepository
 		Task<IList<Posts>> GetAllPosts();
 
 		Task<IList<Posts>> GetPublishedPosts();
-
 		Task<IList<Posts>> GetUnpublishedPosts();
 
 		Task<IList<Posts>> GetLatestPosts(int size);
 
 		Task<IList<Posts>> GetMostViewedPosts(int size);
+
+		Task<IList<Posts>> GetMostInterestingPosts(int size);
 
 		Task<IList<Posts>> GetPostsByMonth(DateTime monthYear);
 
