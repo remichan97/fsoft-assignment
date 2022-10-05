@@ -1,5 +1,6 @@
 ﻿using FA.JustBlog.Core.Infrastructure;
 using FA.JustBlog.Core.Models;
+using FA.JustBlog.ViewModels;
 
 namespace FA.JustBlog.Services.Post
 {
@@ -12,9 +13,24 @@ namespace FA.JustBlog.Services.Post
 			this._unitOfWork = unitOfWork;
 		}
 
+		public Task AddPost(PostCreateVM post)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task DeletePost(Guid postId)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task EditPost(PostCreateVM post)
+		{
+			throw new NotImplementedException();
+		}
+
 		public async Task<IEnumerable<Posts>> GetAllPosts()
 		{
-			return await _unitOfWork.PostsRepository.GetPublishedPosts();
+			return await _unitOfWork.PostsRepository.GetAllPosts();
 		}
 
 		public async Task<IEnumerable<Posts>> GetLatestPosts(int size)
@@ -45,6 +61,11 @@ namespace FA.JustBlog.Services.Post
 		public async Task<Posts> GetPostsDetails(int year, int month, string title)
 		{
 			return await _unitOfWork.PostsRepository.FindPost(year, month, title);
+		}
+
+		public async Task<IEnumerable<Posts>> GetPublishedPosts()
+		{
+			return await _unitOfWork.PostsRepository.GetPublishedPosts();
 		}
 	}
 }

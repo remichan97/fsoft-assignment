@@ -18,7 +18,7 @@ namespace FA.JustBlog.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			var model = await _postService.GetAllPosts();
+			var model = await _postService.GetLatestPosts(3);
 			return View(model);
 		}
 

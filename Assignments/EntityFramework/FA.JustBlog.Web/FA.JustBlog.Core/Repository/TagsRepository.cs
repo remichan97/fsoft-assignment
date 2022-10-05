@@ -12,6 +12,11 @@ namespace FA.JustBlog.Core.Repository
 		{
 		}
 
+		public async Task<IList<Tags>> GetAllTags()
+		{
+			return await _DbContext.Tags.ToListAsync();
+		}
+
 		public async Task<Tags> GetTagsByUrlSlugs(string urlSlugs)
 		{
 			return await _DbContext.Tags.FirstOrDefaultAsync(it => it.UrlSlug.Equals(urlSlugs));

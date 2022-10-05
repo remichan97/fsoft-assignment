@@ -1,7 +1,9 @@
 using FA.JustBlog.Core.Data;
 using FA.JustBlog.Core.Infrastructure;
 using FA.JustBlog.Core.Models;
+using FA.JustBlog.Services.Category;
 using FA.JustBlog.Services.Post;
+using FA.JustBlog.Services.Tag;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +23,8 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<ITagService, TagService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddControllersWithViews();
 

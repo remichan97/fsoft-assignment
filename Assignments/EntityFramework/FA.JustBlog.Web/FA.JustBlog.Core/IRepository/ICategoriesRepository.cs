@@ -5,5 +5,7 @@ namespace FA.JustBlog.Core.IRepository
 {
 	public interface ICategoriesRepository : IBaseRepository<Categories>
 	{
+		Task<IList<Categories>> GetCategories();
+		Task<Categories> CheckExists(Guid id);
 	}
 }

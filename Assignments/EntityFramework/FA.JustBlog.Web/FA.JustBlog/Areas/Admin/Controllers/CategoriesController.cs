@@ -1,5 +1,6 @@
 ﻿using FA.JustBlog.Core.Data;
 using FA.JustBlog.Core.Models;
+using FA.JustBlog.Services.Category;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,35 +11,17 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 	[Authorize]
 	public class CategoriesController : Controller
 	{
-		private readonly AppDbContext _context;
+		private readonly ICategoryService _categoryService;
 
-		public CategoriesController(AppDbContext context)
+		public CategoriesController(ICategoryService categoryService)
 		{
-			_context = context;
+			this._categoryService = categoryService;
 		}
 
 		// GET: Admin/Categories
 		public async Task<IActionResult> Index()
 		{
-			return View(await _context.Categories.ToListAsync());
-		}
-
-		// GET: Admin/Categories/Details/5
-		public async Task<IActionResult> Details(Guid? id)
-		{
-			if (id == null || _context.Categories == null)
-			{
-				return NotFound();
-			}
-
-			var categories = await _context.Categories
-				.FirstOrDefaultAsync(m => m.Id == id);
-			if (categories == null)
-			{
-				return NotFound();
-			}
-
-			return View(categories);
+			return View(await _categoryService.GetAllCategories());
 		}
 
 		// GET: Admin/Categories/Create
@@ -57,8 +40,7 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 			if (ModelState.IsValid)
 			{
 				categories.Id = Guid.NewGuid();
-				_context.Add(categories);
-				await _context.SaveChangesAsync();
+				await _categoryService.AddCategory(categories);
 				return RedirectToAction(nameof(Index));
 			}
 			return View(categories);
@@ -67,12 +49,12 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		// GET: Admin/Categories/Edit/5
 		public async Task<IActionResult> Edit(Guid? id)
 		{
-			if (id == null || _context.Categories == null)
+			if (id == null)
 			{
 				return NotFound();
 			}
 
-			var categories = await _context.Categories.FindAsync(id);
+			var categories = await _categoryService.CheckExist(id.Value);
 			if (categories == null)
 			{
 				return NotFound();
@@ -96,19 +78,18 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 			{
 				try
 				{
-					_context.Update(categories);
-					await _context.SaveChangesAsync();
+					await _categoryService.EditCategory(categories);
 				}
 				catch (DbUpdateConcurrencyException)
 				{
-					if (!CategoriesExists(categories.Id))
-					{
-						return NotFound();
-					}
-					else
-					{
-						throw;
-					}
+					//if (!CategoriesExists(categories.Id))
+					//{
+					//	return NotFound();
+					//}
+					//else
+					//{
+					//	throw;
+					//}
 				}
 				return RedirectToAction(nameof(Index));
 			}
@@ -118,13 +99,12 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		// GET: Admin/Categories/Delete/5
 		public async Task<IActionResult> Delete(Guid? id)
 		{
-			if (id == null || _context.Categories == null)
+			if (id == null)
 			{
 				return NotFound();
 			}
 
-			var categories = await _context.Categories
-				.FirstOrDefaultAsync(m => m.Id == id);
+			var categories = await _categoryService.CheckExist(id.Value);
 			if (categories == null)
 			{
 				return NotFound();
@@ -138,23 +118,13 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> DeleteConfirmed(Guid id)
 		{
-			if (_context.Categories == null)
-			{
-				return Problem("Entity set 'AppDbContext.Categories'  is null.");
-			}
-			var categories = await _context.Categories.FindAsync(id);
+			var categories = await _categoryService.CheckExist(id);
 			if (categories != null)
 			{
-				_context.Categories.Remove(categories);
+				await _categoryService.DeleteCategory(id);
 			}
 
-			await _context.SaveChangesAsync();
 			return RedirectToAction(nameof(Index));
-		}
-
-		private bool CategoriesExists(Guid id)
-		{
-			return _context.Categories.Any(e => e.Id == id);
 		}
 	}
 }

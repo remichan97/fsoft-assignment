@@ -5,6 +5,7 @@ namespace FA.JustBlog.Core.IRepository
 {
 	public interface ITagsRepository : IBaseRepository<Tags>
 	{
+		Task<IList<Tags>> GetAllTags();
 		Task<Tags> GetTagsByUrlSlugs(string urlSlugs);
 	}
 }
