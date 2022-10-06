@@ -105,11 +105,8 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 			model.Meta = posts.Meta;
 			model.Published = posts.Published;
 			model.CategoriesId = posts.CategoriesId;
-			model.TagId = new List<Guid>();
-			foreach (var item in posts.PostTags)
-			{
-				model.TagId.Add(item.TagId);
-			}
+			model.TagId = posts.PostTags.Select(it => it.TagId).ToList();
+			
 			model.PostContent = posts.PostContent;
 
 			ViewData["CategoriesId"] = await _categoryService.GetSelectListItems();

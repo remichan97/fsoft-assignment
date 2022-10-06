@@ -14,17 +14,17 @@ namespace FA.JustBlog.Core.Repository
 
 		public async Task<IList<Posts>> GetPublishedPosts()
 		{
-			return await _DbContext.Posts.Include(it => it.Categories).Where(it => it.Published == true).ToListAsync();
+			return await _DbContext.Posts.Include(it => it.Categories).Include(it => it.PostTags).ThenInclude(it => it.Tags).Where(it => it.Published == true).ToListAsync();
 		}
 
 		public async Task<IList<Posts>> GetUnpublishedPosts()
 		{
-			return await _DbContext.Posts.Include(it => it.Categories).Where(it => it.Published == false).ToListAsync();
+			return await _DbContext.Posts.Include(it => it.Categories).Include(it => it.PostTags).ThenInclude(it => it.Tags).Where(it => it.Published == false).ToListAsync();
 		}
 
 		public async Task<IList<Posts>> GetLatestPosts(int size)
 		{
-			return await _DbContext.Posts.Include(it=> it.Categories).OrderByDescending(it => it.PostedOn).Where(it => it.Published == true).Take(size).ToListAsync();
+			return await _DbContext.Posts.Include(it => it.Categories).Include(it => it.PostTags).ThenInclude(it => it.Tags).OrderByDescending(it => it.PostedOn).Where(it => it.Published == true).Take(size).ToListAsync();
 		}
 
 		public async Task<IList<Posts>> GetPostsByMonth(DateTime monthYear)
@@ -63,22 +63,22 @@ namespace FA.JustBlog.Core.Repository
 
 		public async Task<IList<Posts>> GetMostViewedPosts(int size)
 		{
-			return await _DbContext.Posts.OrderByDescending(it => it.ViewCount).Where(it => it.Published == true).Take(size).ToListAsync();
+			return await _DbContext.Posts.Include(it => it.Categories).Include(it => it.PostTags).ThenInclude(it => it.Tags).OrderByDescending(it => it.ViewCount).Where(it => it.Published == true).Take(size).ToListAsync();
 		}
 
 		public async Task<IList<Posts>> GetAllPosts()
 		{
-			return await _DbContext.Posts.Include(it => it.Categories).ToListAsync();
+			return await _DbContext.Posts.Include(it => it.Categories).Include(it => it.PostTags).ThenInclude(it => it.Tags).ToListAsync();
 		}
 
 		public async Task<Posts> FindPost(Guid id)
 		{
-			return await _DbContext.Posts.Include(it => it.Categories).FirstOrDefaultAsync(it => it.Id.Equals(id));
+			return await _DbContext.Posts.Include(it => it.Categories).Include(it => it.PostTags).FirstOrDefaultAsync(it => it.Id.Equals(id));
 		}
 
 		public async Task<IList<Posts>> GetMostInterestingPosts(int size)
 		{
-			return await _DbContext.Posts.Include(it => it.Categories).OrderByDescending(it => it.TotalRate).Take(size).ToListAsync();
+			return await _DbContext.Posts.Include(it => it.Categories).Include(it => it.PostTags).ThenInclude(it => it.Tags).OrderByDescending(it => it.TotalRate).Take(size).ToListAsync();
 		}
 	}
 }
