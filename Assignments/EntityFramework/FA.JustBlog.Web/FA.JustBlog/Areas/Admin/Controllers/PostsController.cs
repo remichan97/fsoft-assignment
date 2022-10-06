@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace FA.JustBlog.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 	public class PostsController : Controller
 	{
 		private readonly IPostService _postService;
@@ -24,41 +23,49 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		}
 
 		// GET: Admin/Posts
+		[Authorize]
 		public async Task<IActionResult> Index()
 		{
 			var model = await _postService.GetAllPosts();
 			return View(model);
 		}
+
+		[Authorize]
 		public async Task<IActionResult> Latest()
 		{
 			var model = await _postService.GetLatestPosts(5);
 			return View(model);
 		}
 
+		[Authorize]
 		public async Task<IActionResult> MostViewed()
 		{
 			var model = await _postService.GetMostViewedPosts(5);
 			return View(model);
 		}
 
+		[Authorize]
 		public async Task<IActionResult> Interesting()
 		{
 			var model = await _postService.GetMostInterestingPosts(5);
 			return View(model);
 		}
 
+		[Authorize]
 		public async Task<IActionResult> Published()
 		{
 			var model = await _postService.GetPublishedPosts();
 			return View(model);
 		}
 
+		[Authorize]
 		public async Task<IActionResult> Unpublished()
 		{
 			var model = await _postService.GetUnpublishedPosts();
 			return View(model);
 		}
 
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 		// GET: Admin/Posts/Create
 		public async Task<IActionResult> CreateAsync()
 		{
@@ -72,6 +79,7 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 		public async Task<IActionResult> Create([Bind("Title,ShortDescription,Meta,Published,CategoriesId,PostContent,TagId")] PostCreateVM posts)
 		{
 			if (ModelState.IsValid)
@@ -85,6 +93,7 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		}
 
 		// GET: Admin/Posts/Edit/5
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 		public async Task<IActionResult> Edit(Guid? id)
 		{
 			if (id == null)
@@ -120,6 +129,7 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 		public async Task<IActionResult> Edit(Guid id, [Bind("Title,ShortDescription,Meta,Published,CategoriesId,PostContent,TagId")] PostCreateVM posts)
 		{
 

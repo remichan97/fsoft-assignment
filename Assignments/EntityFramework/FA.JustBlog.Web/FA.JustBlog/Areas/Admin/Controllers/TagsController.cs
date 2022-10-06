@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 namespace FA.JustBlog.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 	public class TagsController : Controller
 	{
 		private readonly ITagService _tagService;
@@ -21,11 +20,13 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		}
 
 		// GET: Admin/Tags
+		[Authorize]
 		public async Task<IActionResult> Index()
 		{
 			return View(await _tagService.GetAllTags());
 		}
 		// GET: Admin/Tags/Create
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 		public IActionResult Create()
 		{
 			return View();
@@ -36,6 +37,7 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 		public async Task<IActionResult> Create([Bind("Id,Name,Description")] TagCreateVM tags)
 		{
 			if (ModelState.IsValid)
@@ -53,7 +55,27 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 			return View(tags);
 		}
 
+		[Authorize]
+		public async Task<IActionResult> Details(Guid? id)
+		{
+			if (id == null)
+			{
+				return NotFound();
+			}
+
+			var tags = await _tagService.CheckExists(id.Value);
+			if (tags == null)
+			{
+				return NotFound();
+			}
+
+			var data = new TagCreateVM { Name = tags.Name, Description = tags.Description };
+			TempData["TagId"] = id;
+			return View(data);
+		}
+
 		// GET: Admin/Tags/Edit/5
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 		public async Task<IActionResult> Edit(Guid? id)
 		{
 			if (id == null)
@@ -77,6 +99,7 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 		public async Task<IActionResult> Edit(Guid id, [Bind("Name,Description")] TagCreateVM tags)
 		{
 			if (ModelState.IsValid)

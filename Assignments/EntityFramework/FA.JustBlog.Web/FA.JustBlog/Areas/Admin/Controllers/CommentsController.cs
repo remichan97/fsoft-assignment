@@ -13,8 +13,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace FA.JustBlog.Areas.Admin.Controllers
 {
     [Area("Admin")]
-	[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
-
 	public class CommentsController : Controller
     {
         private readonly AppDbContext _context;
@@ -24,15 +22,17 @@ namespace FA.JustBlog.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: Admin/Comments
-        public async Task<IActionResult> Index()
+		// GET: Admin/Comments
+		[Authorize]
+		public async Task<IActionResult> Index()
         {
             var appDbContext = _context.Comments.Include(c => c.Posts);
             return View(await appDbContext.ToListAsync());
         }
 
-        // GET: Admin/Comments/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+		// GET: Admin/Comments/Details/5
+		[Authorize]
+		public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Comments == null)
             {
@@ -50,8 +50,9 @@ namespace FA.JustBlog.Areas.Admin.Controllers
             return View(comments);
         }
 
-        // GET: Admin/Comments/Create
-        public IActionResult Create()
+		// GET: Admin/Comments/Create
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
+		public IActionResult Create()
         {
             ViewData["PostId"] = new SelectList(_context.Posts, "Id", "Meta");
             return View();
@@ -62,7 +63,8 @@ namespace FA.JustBlog.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Email,PostId,CommentHeader,CommentText,CommentTime")] Comments comments)
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
+		public async Task<IActionResult> Create([Bind("Id,Name,Email,PostId,CommentHeader,CommentText,CommentTime")] Comments comments)
         {
             if (ModelState.IsValid)
             {
@@ -75,8 +77,9 @@ namespace FA.JustBlog.Areas.Admin.Controllers
             return View(comments);
         }
 
-        // GET: Admin/Comments/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+		// GET: Admin/Comments/Edit/5
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
+		public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Comments == null)
             {
@@ -97,7 +100,8 @@ namespace FA.JustBlog.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Email,PostId,CommentHeader,CommentText,CommentTime")] Comments comments)
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
+		public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Email,PostId,CommentHeader,CommentText,CommentTime")] Comments comments)
         {
             if (id != comments.Id)
             {

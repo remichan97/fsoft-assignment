@@ -9,8 +9,6 @@ using Microsoft.EntityFrameworkCore;
 namespace FA.JustBlog.Areas.Admin.Controllers
 {
 	[Area("Admin")]
-	[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
-
 	public class CategoriesController : Controller
 	{
 		private readonly ICategoryService _categoryService;
@@ -21,12 +19,14 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		}
 
 		// GET: Admin/Categories
+		[Authorize]
 		public async Task<IActionResult> Index()
 		{
 			return View(await _categoryService.GetAllCategories());
 		}
 
 		// GET: Admin/Categories/Create
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 		public IActionResult Create()
 		{
 			return View();
@@ -37,6 +37,7 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 		public async Task<IActionResult> Create([Bind("Id,Name,UrlSlug,Description")] Categories categories)
 		{
 			if (ModelState.IsValid)
@@ -48,6 +49,23 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 			return View(categories);
 		}
 
+		[Authorize]
+		public async Task<IActionResult> Details(Guid? id)
+		{
+			if (id == null)
+			{
+				return NotFound();
+			}
+
+			var categories = await _categoryService.CheckExist(id.Value);
+			if (categories == null)
+			{
+				return NotFound();
+			}
+			return View(categories);
+		}
+
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 		// GET: Admin/Categories/Edit/5
 		public async Task<IActionResult> Edit(Guid? id)
 		{
@@ -69,6 +87,7 @@ namespace FA.JustBlog.Areas.Admin.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
+		[Authorize(Roles = Role.BlogOwner + "," + Role.Contributor)]
 		public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,UrlSlug,Description")] Categories categories)
 		{
 			if (id != categories.Id)
